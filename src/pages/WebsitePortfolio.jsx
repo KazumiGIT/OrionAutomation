@@ -9,7 +9,7 @@ const WebsitePortfolio = () => {
             title: 'Sumi-Ka Restaurant',
             category: 'Restaurant Website',
             description: 'Authentic Japanese yakitori restaurant with elegant design and interactive menu',
-            image: 'https://images.unsplash.com/photo-1579027989536-b7b1f875659b?w=600&h=400&fit=crop',
+            image: '/sumika-card.jpg',
             link: '/sumika',
             tags: ['HTML/CSS', 'JavaScript', 'Responsive'],
             isExternal: true
