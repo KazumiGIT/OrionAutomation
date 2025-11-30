@@ -8,7 +8,6 @@ const ProfileModal = ({ isOpen, onClose }) => {
     const [isEditing, setIsEditing] = useState(false);
     const [isServiceModalOpen, setIsServiceModalOpen] = useState(false);
     const [formData, setFormData] = useState({
-        name: '',
         username: ''
     });
     const fileInputRef = useRef(null);
@@ -16,7 +15,6 @@ const ProfileModal = ({ isOpen, onClose }) => {
     useEffect(() => {
         if (user) {
             setFormData({
-                name: user.name,
                 username: user.username
             });
         }
@@ -59,8 +57,8 @@ const ProfileModal = ({ isOpen, onClose }) => {
                         left: 0,
                         right: 0,
                         bottom: 0,
-                        background: 'rgba(0, 0, 0, 0.8)',
-                        backdropFilter: 'blur(5px)',
+                        background: 'rgba(0, 0, 0, 0.7)',
+                        backdropFilter: 'blur(8px)',
                         zIndex: 1500,
                         display: 'flex',
                         alignItems: 'center',
@@ -78,11 +76,12 @@ const ProfileModal = ({ isOpen, onClose }) => {
                             maxWidth: '500px',
                             width: '100%',
                             position: 'relative',
-                            border: '1px solid var(--color-gold)',
-                            boxShadow: 'var(--shadow-glow-gold)',
-                            padding: 'var(--spacing-xl)',
+                            border: '2px solid #E6A520',
+                            boxShadow: '0 20px 60px rgba(230, 165, 32, 0.3)',
+                            padding: '2rem',
                             maxHeight: '90vh',
-                            overflowY: 'auto'
+                            overflowY: 'auto',
+                            background: 'rgba(255, 248, 231, 0.95)'
                         }}
                     >
                         <button
@@ -93,10 +92,19 @@ const ProfileModal = ({ isOpen, onClose }) => {
                                 right: '1rem',
                                 background: 'transparent',
                                 border: 'none',
-                                color: 'var(--color-ivory)',
-                                fontSize: '1.5rem',
+                                color: '#7A4A00',
+                                fontSize: '2rem',
                                 cursor: 'pointer',
+                                width: '40px',
+                                height: '40px',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center',
+                                borderRadius: '50%',
+                                transition: 'all 0.3s ease'
                             }}
+                            onMouseEnter={(e) => e.target.style.background = 'rgba(230, 165, 32, 0.2)'}
+                            onMouseLeave={(e) => e.target.style.background = 'transparent'}
                         >
                             ×
                         </button>
@@ -105,21 +113,22 @@ const ProfileModal = ({ isOpen, onClose }) => {
                         <div style={{
                             display: 'flex',
                             alignItems: 'center',
-                            gap: 'var(--spacing-lg)',
-                            marginBottom: 'var(--spacing-xl)',
-                            borderBottom: '1px solid rgba(197, 168, 128, 0.2)',
-                            paddingBottom: 'var(--spacing-lg)'
+                            gap: '1.5rem',
+                            marginBottom: '2rem',
+                            paddingBottom: '1.5rem',
+                            borderBottom: '2px solid rgba(230, 165, 32, 0.3)'
                         }}>
                             <div style={{ position: 'relative' }}>
                                 <img
                                     src={user.avatar}
                                     alt="Profile"
                                     style={{
-                                        width: '80px',
-                                        height: '80px',
+                                        width: '100px',
+                                        height: '100px',
                                         borderRadius: '50%',
-                                        border: '2px solid var(--color-gold)',
-                                        objectFit: 'cover'
+                                        border: '3px solid #E6A520',
+                                        objectFit: 'cover',
+                                        boxShadow: '0 4px 12px rgba(230, 165, 32, 0.3)'
                                     }}
                                 />
                                 <button
@@ -128,19 +137,29 @@ const ProfileModal = ({ isOpen, onClose }) => {
                                         position: 'absolute',
                                         bottom: 0,
                                         right: 0,
-                                        background: 'var(--color-gold)',
-                                        border: 'none',
+                                        background: '#E6A520',
+                                        border: '2px solid #FFF8E7',
                                         borderRadius: '50%',
-                                        width: '24px',
-                                        height: '24px',
+                                        width: '36px',
+                                        height: '36px',
                                         display: 'flex',
                                         alignItems: 'center',
                                         justifyContent: 'center',
                                         cursor: 'pointer',
-                                        color: 'black',
-                                        fontSize: '12px'
+                                        color: '#000',
+                                        fontSize: '16px',
+                                        boxShadow: '0 2px 8px rgba(0,0,0,0.2)',
+                                        transition: 'all 0.3s ease'
                                     }}
                                     title="Upload Photo"
+                                    onMouseEnter={(e) => {
+                                        e.target.style.transform = 'scale(1.1)';
+                                        e.target.style.background = '#D49520';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.target.style.transform = 'scale(1)';
+                                        e.target.style.background = '#E6A520';
+                                    }}
                                 >
                                     📷
                                 </button>
@@ -155,49 +174,107 @@ const ProfileModal = ({ isOpen, onClose }) => {
 
                             <div style={{ flex: 1 }}>
                                 {isEditing ? (
-                                    <form onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
-                                        <input
-                                            type="text"
-                                            value={formData.name}
-                                            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                            style={{
-                                                background: 'rgba(0,0,0,0.3)',
-                                                border: '1px solid var(--color-gold)',
-                                                padding: '0.5rem',
-                                                color: 'white',
-                                                borderRadius: '4px'
-                                            }}
-                                        />
+                                    <form onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
                                         <input
                                             type="text"
                                             value={formData.username}
                                             onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                                             style={{
-                                                background: 'rgba(0,0,0,0.3)',
-                                                border: '1px solid var(--color-gold)',
-                                                padding: '0.5rem',
-                                                color: 'white',
-                                                borderRadius: '4px'
+                                                background: 'rgba(255, 255, 255, 0.8)',
+                                                border: '2px solid #E6A520',
+                                                padding: '0.75rem',
+                                                color: '#000',
+                                                borderRadius: '8px',
+                                                fontSize: '1rem',
+                                                fontWeight: '600'
                                             }}
+                                            placeholder="Username"
                                         />
-                                        <div style={{ display: 'flex', gap: '0.5rem' }}>
-                                            <button type="submit" className="btn btn-primary" style={{ padding: '0.25rem 1rem', fontSize: '0.8rem' }}>Save</button>
-                                            <button type="button" onClick={() => setIsEditing(false)} className="btn btn-secondary" style={{ padding: '0.25rem 1rem', fontSize: '0.8rem' }}>Cancel</button>
+                                        <div style={{ display: 'flex', gap: '0.5rem', marginTop: '0.5rem' }}>
+                                            <button
+                                                type="submit"
+                                                style={{
+                                                    flex: 1,
+                                                    background: '#E6A520',
+                                                    color: '#000',
+                                                    border: 'none',
+                                                    padding: '0.75rem',
+                                                    borderRadius: '8px',
+                                                    fontWeight: 'bold',
+                                                    cursor: 'pointer',
+                                                    fontSize: '0.9rem',
+                                                    transition: 'all 0.3s ease'
+                                                }}
+                                                onMouseEnter={(e) => e.target.style.background = '#D49520'}
+                                                onMouseLeave={(e) => e.target.style.background = '#E6A520'}
+                                            >
+                                                Save
+                                            </button>
+                                            <button
+                                                type="button"
+                                                onClick={() => setIsEditing(false)}
+                                                style={{
+                                                    flex: 1,
+                                                    background: 'transparent',
+                                                    color: '#7A4A00',
+                                                    border: '2px solid #7A4A00',
+                                                    padding: '0.75rem',
+                                                    borderRadius: '8px',
+                                                    fontWeight: 'bold',
+                                                    cursor: 'pointer',
+                                                    fontSize: '0.9rem',
+                                                    transition: 'all 0.3s ease'
+                                                }}
+                                                onMouseEnter={(e) => e.target.style.background = 'rgba(122, 74, 0, 0.1)'}
+                                                onMouseLeave={(e) => e.target.style.background = 'transparent'}
+                                            >
+                                                Cancel
+                                            </button>
                                         </div>
                                     </form>
                                 ) : (
                                     <>
-                                        <h2 style={{ fontSize: '1.5rem', marginBottom: '0.25rem' }}>{user.name}</h2>
-                                        <p style={{ color: 'var(--color-gold)', opacity: 0.8, fontSize: '0.9rem' }}>@{user.username}</p>
-                                        <p style={{ fontSize: '0.8rem', opacity: 0.6 }}>Member since {user.joinDate}</p>
+                                        <h2 style={{
+                                            fontSize: '1.8rem',
+                                            marginBottom: '0.25rem',
+                                            color: '#000',
+                                            fontWeight: 'bold'
+                                        }}>
+                                            @{user.username}
+                                        </h2>
+                                        <p style={{
+                                            fontSize: '0.85rem',
+                                            color: '#7A4A00',
+                                            opacity: 0.7
+                                        }}>
+                                            Member since {user.joinDate}
+                                        </p>
                                     </>
                                 )}
                             </div>
                             {!isEditing && (
                                 <button
                                     onClick={() => setIsEditing(true)}
-                                    className="btn btn-secondary"
-                                    style={{ fontSize: '0.8rem', padding: '0.5rem 1rem' }}
+                                    style={{
+                                        background: '#E6A520',
+                                        color: '#000',
+                                        border: 'none',
+                                        padding: '0.75rem 1.5rem',
+                                        borderRadius: '8px',
+                                        fontWeight: 'bold',
+                                        cursor: 'pointer',
+                                        fontSize: '0.9rem',
+                                        transition: 'all 0.3s ease',
+                                        boxShadow: '0 2px 8px rgba(230, 165, 32, 0.3)'
+                                    }}
+                                    onMouseEnter={(e) => {
+                                        e.target.style.background = '#D49520';
+                                        e.target.style.transform = 'translateY(-2px)';
+                                    }}
+                                    onMouseLeave={(e) => {
+                                        e.target.style.background = '#E6A520';
+                                        e.target.style.transform = 'translateY(0)';
+                                    }}
                                 >
                                     Edit
                                 </button>
@@ -205,41 +282,68 @@ const ProfileModal = ({ isOpen, onClose }) => {
                         </div>
 
                         {/* Current Plan */}
-                        <div style={{ marginBottom: 'var(--spacing-xl)' }}>
-                            <h3 style={{ color: 'var(--color-gold)', marginBottom: 'var(--spacing-md)', fontSize: '1.2rem' }}>Current Plan</h3>
+                        <div style={{ marginBottom: '2rem' }}>
+                            <h3 style={{
+                                color: '#000',
+                                marginBottom: '1rem',
+                                fontSize: '1.3rem',
+                                fontWeight: 'bold'
+                            }}>
+                                Current Plan
+                            </h3>
                             {user.currentPlan ? (
                                 <div style={{
-                                    background: 'rgba(197, 168, 128, 0.1)',
-                                    padding: 'var(--spacing-md)',
-                                    borderRadius: 'var(--radius-md)',
-                                    border: '1px solid var(--color-gold)'
+                                    background: 'rgba(230, 165, 32, 0.1)',
+                                    padding: '1.5rem',
+                                    borderRadius: '12px',
+                                    border: '2px solid #E6A520'
                                 }}>
-                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.5rem' }}>
-                                        <h4 style={{ fontSize: '1.1rem', margin: 0 }}>{user.currentPlan.title}</h4>
+                                    <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '0.75rem' }}>
+                                        <h4 style={{ fontSize: '1.2rem', margin: 0, color: '#000', fontWeight: 'bold' }}>{user.currentPlan.title}</h4>
                                         <span style={{
-                                            background: 'var(--color-gold)',
-                                            color: 'black',
-                                            padding: '0.2rem 0.5rem',
-                                            borderRadius: '12px',
+                                            background: '#E6A520',
+                                            color: '#000',
+                                            padding: '0.4rem 0.8rem',
+                                            borderRadius: '20px',
                                             fontWeight: 'bold',
-                                            fontSize: '0.7rem'
+                                            fontSize: '0.75rem'
                                         }}>ACTIVE</span>
                                     </div>
-                                    <p style={{ fontSize: '1rem', marginBottom: '0.25rem' }}>{user.currentPlan.price}</p>
-                                    <p style={{ opacity: 0.7, fontSize: '0.8rem' }}>Purchased on: {user.currentPlan.purchaseDate}</p>
+                                    <p style={{ fontSize: '1.1rem', marginBottom: '0.5rem', color: '#000', fontWeight: '600' }}>{user.currentPlan.price}</p>
+                                    <p style={{ color: '#7A4A00', fontSize: '0.85rem' }}>Purchased on: {user.currentPlan.purchaseDate}</p>
                                 </div>
                             ) : (
                                 <div style={{
                                     textAlign: 'center',
-                                    padding: 'var(--spacing-lg)',
-                                    background: 'rgba(255,255,255,0.05)',
-                                    borderRadius: 'var(--radius-md)'
+                                    padding: '2rem',
+                                    background: 'rgba(255, 255, 255, 0.5)',
+                                    borderRadius: '12px',
+                                    border: '2px dashed #E6A520'
                                 }}>
-                                    <p style={{ marginBottom: '1rem', opacity: 0.7, fontSize: '0.9rem' }}>You haven't purchased any plans yet.</p>
+                                    <p style={{ marginBottom: '1.5rem', color: '#7A4A00', fontSize: '1rem' }}>You haven't purchased any plans yet.</p>
                                     <button
                                         onClick={() => setIsServiceModalOpen(true)}
-                                        className="btn btn-primary"
-                                        style={{ width: '100%' }}
+                                        style={{
+                                            background: '#E6A520',
+                                            color: '#000',
+                                            border: 'none',
+                                            padding: '1rem 2rem',
+                                            borderRadius: '8px',
+                                            fontWeight: 'bold',
+                                            cursor: 'pointer',
+                                            fontSize: '1rem',
+                                            width: '100%',
+                                            transition: 'all 0.3s ease',
+                                            boxShadow: '0 4px 12px rgba(230, 165, 32, 0.3)'
+                                        }}
+                                        onMouseEnter={(e) => {
+                                            e.target.style.background = '#D49520';
+                                            e.target.style.transform = 'translateY(-2px)';
+                                        }}
+                                        onMouseLeave={(e) => {
+                                            e.target.style.background = '#E6A520';
+                                            e.target.style.transform = 'translateY(0)';
+                                        }}
                                     >
                                         Browse Services
                                     </button>
@@ -248,7 +352,7 @@ const ProfileModal = ({ isOpen, onClose }) => {
                         </div>
 
                         {/* Account Actions */}
-                        <div style={{ borderTop: '1px solid rgba(197, 168, 128, 0.2)', paddingTop: 'var(--spacing-lg)' }}>
+                        <div style={{ borderTop: '2px solid rgba(230, 165, 32, 0.3)', paddingTop: '1.5rem' }}>
                             <button
                                 onClick={() => {
                                     logout();
@@ -256,18 +360,26 @@ const ProfileModal = ({ isOpen, onClose }) => {
                                 }}
                                 style={{
                                     background: 'transparent',
-                                    border: '1px solid #ff4444',
+                                    border: '2px solid #ff4444',
                                     color: '#ff4444',
-                                    padding: '0.5rem 1.5rem',
-                                    borderRadius: 'var(--radius-sm)',
+                                    padding: '0.75rem 2rem',
+                                    borderRadius: '8px',
                                     cursor: 'pointer',
                                     transition: 'all 0.3s ease',
-                                    fontSize: '0.9rem'
+                                    fontSize: '1rem',
+                                    fontWeight: 'bold',
+                                    width: '100%'
                                 }}
-                                onMouseEnter={(e) => e.target.style.background = 'rgba(255, 68, 68, 0.1)'}
-                                onMouseLeave={(e) => e.target.style.background = 'transparent'}
+                                onMouseEnter={(e) => {
+                                    e.target.style.background = 'rgba(255, 68, 68, 0.1)';
+                                    e.target.style.transform = 'translateY(-2px)';
+                                }}
+                                onMouseLeave={(e) => {
+                                    e.target.style.background = 'transparent';
+                                    e.target.style.transform = 'translateY(0)';
+                                }}
                             >
-                                Log Out
+                                🚪 Log Out
                             </button>
                         </div>
                     </motion.div>

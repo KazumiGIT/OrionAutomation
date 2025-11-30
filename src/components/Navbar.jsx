@@ -139,7 +139,7 @@ const Navbar = () => {
                                 }}
                             >
                                 <img
-                                    src={user ? getAvatar(user.email) : defaultAvatar}
+                                    src={user ? user.avatar : defaultAvatar}
                                     alt={user ? user.name : 'Guest'}
                                     style={{
                                         width: '45px',
@@ -177,7 +177,7 @@ const Navbar = () => {
                                         gap: '1rem'
                                     }}>
                                         <img
-                                            src={user ? getAvatar(user.email) : defaultAvatar}
+                                            src={user ? user.avatar : defaultAvatar}
                                             alt={user ? user.name : 'Guest'}
                                             style={{
                                                 width: '50px',
@@ -191,18 +191,8 @@ const Navbar = () => {
                                             <div style={{
                                                 fontSize: '1.1rem',
                                                 fontWeight: 'bold',
-                                                color: '#7A4A00',
+                                                color: '#000000',
                                                 marginBottom: '0.25rem',
-                                                overflow: 'hidden',
-                                                textOverflow: 'ellipsis',
-                                                whiteSpace: 'nowrap'
-                                            }}>
-                                                {user ? user.name : 'Guest'}
-                                            </div>
-                                            <div style={{
-                                                fontSize: '0.85rem',
-                                                color: 'var(--color-gold)',
-                                                opacity: 0.8,
                                                 overflow: 'hidden',
                                                 textOverflow: 'ellipsis',
                                                 whiteSpace: 'nowrap'
@@ -227,7 +217,7 @@ const Navbar = () => {
                                                         cursor: 'pointer',
                                                         textAlign: 'left',
                                                         padding: '0.75rem 1.25rem',
-                                                        color: '#7A4A00',
+                                                        color: '#000000',
                                                         display: 'block',
                                                         fontSize: '1rem',
                                                         width: '100%',
@@ -269,7 +259,7 @@ const Navbar = () => {
                                                     margin: '0 1.25rem 0.75rem',
                                                     padding: '0.75rem',
                                                     background: 'var(--color-gold)',
-                                                    color: '#FFF8E7',
+                                                    color: '#000000',
                                                     borderRadius: 'var(--radius-sm)',
                                                     fontWeight: 'bold',
                                                     border: 'none',

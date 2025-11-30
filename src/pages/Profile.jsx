@@ -8,7 +8,6 @@ const Profile = () => {
     const navigate = useNavigate();
     const [isEditing, setIsEditing] = useState(false);
     const [formData, setFormData] = useState({
-        name: '',
         username: ''
     });
 
@@ -17,7 +16,6 @@ const Profile = () => {
             navigate('/auth');
         } else {
             setFormData({
-                name: user.name,
                 username: user.username
             });
         }
@@ -64,18 +62,6 @@ const Profile = () => {
                                 <form onSubmit={handleSave} style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                                     <input
                                         type="text"
-                                        value={formData.name}
-                                        onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                                        style={{
-                                            background: 'rgba(0,0,0,0.3)',
-                                            border: '1px solid var(--color-gold)',
-                                            padding: '0.5rem',
-                                            color: 'white',
-                                            borderRadius: '4px'
-                                        }}
-                                    />
-                                    <input
-                                        type="text"
                                         value={formData.username}
                                         onChange={(e) => setFormData({ ...formData, username: e.target.value })}
                                         style={{
@@ -93,8 +79,7 @@ const Profile = () => {
                                 </form>
                             ) : (
                                 <>
-                                    <h1 style={{ fontSize: '2rem', marginBottom: '0.25rem' }}>{user.name}</h1>
-                                    <p style={{ color: 'var(--color-gold)', opacity: 0.8 }}>@{user.username}</p>
+                                    <h1 style={{ fontSize: '2rem', marginBottom: '0.25rem' }}>@{user.username}</h1>
                                     <p style={{ fontSize: '0.9rem', opacity: 0.6 }}>Member since {user.joinDate}</p>
                                 </>
                             )}

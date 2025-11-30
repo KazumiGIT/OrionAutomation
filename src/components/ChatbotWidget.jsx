@@ -1,7 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { GoogleGenerativeAI } from '@google/generative-ai';
+import { useUser } from '../context/UserContext';
 
 const ChatbotWidget = () => {
+    const { user } = useUser();
     const [isOpen, setIsOpen] = useState(false);
     const [messages, setMessages] = useState([
         {
@@ -45,32 +47,83 @@ const ChatbotWidget = () => {
             const savedSettings = localStorage.getItem('chatbotSettings');
             const settings = savedSettings ? JSON.parse(savedSettings) : {
                 botName: 'Orion AI',
-                aiGoal: 'You are Orion AI, an intelligent assistant for Orion Automation, a company specializing in AI-driven business solutions and automation services.',
-                personality: 'Helpful, professional, and friendly.',
-                knowledgeBase: `Services:
-            - AI Chatbots: Starting from RM 399/month (Basic), RM 799/month (Advanced), RM 1,499/month (Enterprise)
-            - Website Development: Starting from RM 8,900 (Essential Package), RM 19,900 (Premium Package), RM 39,900 (Elite Package)
-            - Marketing & SEO services
+                aiGoal: 'You are Orion AI, a friendly assistant for Orion Automation. Help visitors learn about our services and connect with us.',
+                personality: 'Conversational, helpful, and concise. Keep responses SHORT (2-3 sentences max). Sound human and friendly, not robotic.',
+                knowledgeBase: `ORION AUTOMATION - Complete Info:
 
-            Contact Information:
-            - Email: marketing@orionautomation.xyz
-            - WhatsApp: +60 11-5445 5435
+🤖 AI CHATBOT SERVICES:
+- Basic Plan: RM 399/month - Perfect for small businesses, 1,000 messages/month, basic customization
+- Advanced Plan: RM 799/month - Growing businesses, 5,000 messages/month, full customization, analytics
+- Enterprise Plan: RM 1,499/month - Large companies, unlimited messages, priority support, advanced AI
 
-            Company Mission: Helping companies scale through intelligent automation and AI-driven solutions.`
+💻 WEBSITE DEVELOPMENT:
+- Essential Package: RM 8,900 - 5-page responsive website, mobile-friendly, basic SEO, 1 month support
+- Premium Package: RM 19,900 - 10-page custom design, advanced SEO, e-commerce ready, 3 months support
+- Elite Package: RM 39,900 - Unlimited pages, premium design, full e-commerce, 6 months support, custom features
+
+📱 MARKETING & SEO:
+- Social media management
+- Google Ads & Facebook Ads
+- SEO optimization
+- Content creation
+- Email marketing campaigns
+
+📍 CONTACT:
+- Email: marketing@orionautomation.xyz
+- WhatsApp: +60 11-5445 5435
+- Website: orionautomation.xyz
+- Location: Based in Malaysia, serving globally
+
+🎯 WHAT WE DO:
+We help businesses grow with AI chatbots, beautiful websites, and smart marketing. Our mission is making automation accessible to everyone.
+
+✨ PORTFOLIO:
+- Sumi-Ka Restaurant website (authentic Japanese yakitori restaurant in SS15 Subang Jaya)
+- Multiple e-commerce platforms
+- Corporate websites
+- Custom web applications
+
+RESPONSE STYLE:
+- Keep it SHORT (2-3 sentences)
+- Be friendly and conversational
+- Use emojis occasionally 
+- If asked about pricing, mention packages briefly
+- Always offer to connect them via WhatsApp or email for details
+- Sound like a helpful human, not a robot`
             };
 
             // Create context based on settings
-            const context = `You are ${settings.botName}.
-            
-            Your Goal: ${settings.aiGoal}
-            
-            Your Personality: ${settings.personality}
-            
-            Knowledge Base:
-            ${settings.knowledgeBase}
+            let userContext = '';
+            if (user) {
+                userContext = `
+CURRENT USER INFO:
+- Username: ${user.username}
+- Email: ${user.email}
+- Current Plan: ${user.currentPlan ? `${user.currentPlan.title} (${user.currentPlan.price})` : 'No active plan'}
+- Member Since: ${user.joinDate}
 
-            Please answer the following question based on the above instructions:
-            ${currentInput}`;
+INSTRUCTION: You are talking to @${user.username}. Use their username occasionally to be friendly. You know their plan status, so if they ask about upgrades, refer to their current plan.`;
+            } else {
+                userContext = `
+CURRENT USER INFO: Guest User (Not logged in)
+
+INSTRUCTION: The user is a guest. Encourage them to sign up or log in if they ask about account-specific features.`;
+            }
+
+            const context = `You are ${settings.botName}.
+
+${settings.aiGoal}
+
+Personality: ${settings.personality}
+
+${userContext}
+
+Knowledge Base:
+${settings.knowledgeBase}
+
+CRITICAL: Keep your response SHORT (maximum 2-3 sentences). Be conversational and human-like.
+
+User question: ${currentInput}`;
 
             // Call Gemini API
             const result = await model.generateContent(context);
@@ -192,7 +245,7 @@ const ChatbotWidget = () => {
                                 padding: '0.8rem',
                                 borderRadius: '12px',
                                 background: msg.type === 'user' ? 'var(--color-gold)' : 'rgba(255, 255, 255, 0.1)',
-                                color: msg.type === 'user' ? '#000' : '#fff',
+                                color: msg.type === 'user' ? '#000' : '#7A4A00',
                                 fontSize: '0.9rem',
                                 borderBottomRightRadius: msg.type === 'user' ? '2px' : '12px',
                                 borderBottomLeftRadius: msg.type === 'bot' ? '2px' : '12px',
@@ -207,7 +260,7 @@ const ChatbotWidget = () => {
                                 padding: '0.8rem',
                                 borderRadius: '12px',
                                 background: 'rgba(255, 255, 255, 0.1)',
-                                color: '#fff',
+                                color: '#7A4A00',
                                 fontSize: '0.9rem',
                                 display: 'flex',
                                 gap: '0.5rem',
