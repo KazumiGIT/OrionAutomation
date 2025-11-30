@@ -1,0 +1,93 @@
+﻿
+/* Enhanced Hero Background - Yakitori Grill Atmosphere */
+.hero {
+  background: 
+    radial-gradient(ellipse at bottom center, rgba(255, 112, 67, 0.15) 0%, transparent 60%),
+    radial-gradient(ellipse at 30% 40%, rgba(212, 163, 115, 0.2) 0%, transparent 50%),
+    radial-gradient(ellipse at 70% 60%, rgba(139, 111, 71, 0.15) 0%, transparent 50%),
+    linear-gradient(to top, var(--deep-charcoal) 0%, var(--charcoal) 50%, #1f1f1f 100%) !important;
+}
+
+.hero::before {
+  background-image:
+    radial-gradient(circle at 20% 80%, rgba(255, 112, 67, 0.25) 0%, transparent 40%),
+    radial-gradient(circle at 80% 70%, rgba(212, 163, 115, 0.2) 0%, transparent 45%),
+    radial-gradient(circle at 50% 90%, rgba(255, 140, 60, 0.15) 0%, transparent 50%) !important;
+  animation: glowPulse 4s ease-in-out infinite;
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: 0.8; }
+  50% { opacity: 1; }
+}
+
+.hero::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 200px;
+  background: linear-gradient(to top, var(--deep-charcoal), transparent);
+  pointer-events: none;
+  z-index: 1;
+}
+
+/* Horizontal Scrolling Menu */
+.menu-scroll-container {
+  position: relative;
+  margin-top: var(--spacing-lg);
+}
+
+.menu-grid {
+  display: flex !important;
+  gap: var(--spacing-md);
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: var(--spacing-sm) 0 var(--spacing-md) 0;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: thin;
+  scrollbar-color: var(--warm-gold) var(--charcoal);
+}
+
+.menu-grid::-webkit-scrollbar {
+  height: 8px;
+}
+
+.menu-grid::-webkit-scrollbar-track {
+  background: var(--charcoal);
+  border-radius: 10px;
+}
+
+.menu-grid::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, var(--warm-orange), var(--warm-gold));
+  border-radius: 10px;
+}
+
+.menu-grid::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, var(--warm-gold), var(--warm-orange));
+}
+
+.menu-category {
+  min-width: 320px;
+  flex-shrink: 0;
+}
+
+.menu-category:hover {
+  transform: translateY(-5px);
+}
+
+.menu-item-name {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.menu-item-price {
+  color: var(--warm-gold);
+  font-weight: 700;
+  font-size: 1.1rem;
+  margin-left: 1rem;
+  flex-shrink: 0;
+}
