@@ -119,6 +119,9 @@
   border-bottom: 1px solid rgba(230, 165, 32, 0.2);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   animation: slideDown 0.3s ease-out;
+  max-height: calc(100vh - 80px);
+  overflow-y: auto;
+  overflow-x: hidden;
 }
 
 @keyframes slideDown {

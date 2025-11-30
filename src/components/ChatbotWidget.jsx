@@ -269,14 +269,16 @@ User question: ${currentInput}`;
                         {messages.map((msg, idx) => (
                             <div key={idx} style={{
                                 alignSelf: msg.type === 'user' ? 'flex-end' : 'flex-start',
-                                maxWidth: '80%',
-                                padding: '0.8rem',
+                                maxWidth: window.innerWidth <= 768 ? '75%' : '80%',
+                                padding: window.innerWidth <= 768 ? '0.6rem' : '0.8rem',
                                 borderRadius: '12px',
                                 background: msg.type === 'user' ? 'var(--color-gold)' : 'rgba(255, 255, 255, 0.1)',
                                 color: msg.type === 'user' ? '#000' : '#7A4A00',
-                                fontSize: '0.9rem',
+                                fontSize: window.innerWidth <= 768 ? '0.85rem' : '0.9rem',
                                 borderBottomRightRadius: msg.type === 'user' ? '2px' : '12px',
                                 borderBottomLeftRadius: msg.type === 'bot' ? '2px' : '12px',
+                                wordWrap: 'break-word',
+                                overflowWrap: 'break-word'
                             }}>
                                 {msg.text}
                             </div>
@@ -309,7 +311,7 @@ User question: ${currentInput}`;
 
                     {/* Input */}
                     <form onSubmit={handleSend} style={{
-                        padding: '1rem',
+                        padding: window.innerWidth <= 768 ? '0.75rem' : '1rem',
                         borderTop: '1px solid rgba(197, 168, 128, 0.2)',
                         display: 'flex',
                         gap: '0.5rem',
@@ -325,10 +327,11 @@ User question: ${currentInput}`;
                                 background: 'rgba(0, 0, 0, 0.3)',
                                 border: '1px solid rgba(197, 168, 128, 0.3)',
                                 borderRadius: '20px',
-                                padding: '0.5rem 1rem',
+                                padding: window.innerWidth <= 768 ? '0.5rem 0.75rem' : '0.5rem 1rem',
                                 color: '#fff',
                                 outline: 'none',
                                 opacity: isLoading ? 0.6 : 1,
+                                fontSize: window.innerWidth <= 768 ? '0.9rem' : '1rem'
                             }}
                         />
                         <button

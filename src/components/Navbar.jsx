@@ -177,8 +177,8 @@ const Navbar = () => {
                                 />
                             </button>
 
-                            {/* Dropdown Menu */}
-                            {isDropdownOpen && (
+                            {/* Dropdown Menu - Desktop Only */}
+                            {isDropdownOpen && window.innerWidth > 768 && (
                                 <div className="glass-card fade-in" style={{
                                     position: 'absolute',
                                     top: '100%',
