@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
 import ProfileModal from './ProfileModal';
@@ -13,6 +13,7 @@ const Navbar = () => {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const location = useLocation();
     const { user, logout } = useUser();
+    const dropdownRef = useRef(null);
 
     useEffect(() => {
         const handleScroll = () => {
@@ -32,6 +33,32 @@ const Navbar = () => {
             window.removeEventListener('resize', handleResize);
         };
     }, []);
+
+    // Click-outside handler for dropdown
+    useEffect(() => {
+        const handleClickOutside = (event) => {
+            if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+                setIsDropdownOpen(false);
+            }
+        };
+
+        if (isDropdownOpen) {
+            document.addEventListener('mousedown', handleClickOutside);
+            document.addEventListener('touchstart', handleClickOutside);
+        }
+
+        return () => {
+            document.removeEventListener('mousedown', handleClickOutside);
+            document.removeEventListener('touchstart', handleClickOutside);
+        };
+    }, [isDropdownOpen]);
+
+    // Close dropdown when mobile menu opens
+    useEffect(() => {
+        if (isMobileMenuOpen) {
+            setIsDropdownOpen(false);
+        }
+    }, [isMobileMenuOpen]);
 
     // Default guest avatar - using Boring Avatars style
     const getAvatar = (seed) => {
@@ -122,7 +149,7 @@ const Navbar = () => {
 
                     {/* Profile Section (Desktop) */}
                     <div className="nav-links-desktop" style={{ flex: '0 0 auto' }}>
-                        <div style={{ position: 'relative' }}>
+                        <div ref={dropdownRef} style={{ position: 'relative' }}>
                             <button
                                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
                                 style={{
@@ -309,6 +336,46 @@ const Navbar = () => {
 
                         {user ? (
                             <>
+                                {/* User Profile Section in Mobile Menu */}
+                                <div style={{
+                                    display: 'flex',
+                                    alignItems: 'center',
+                                    gap: '1rem',
+                                    padding: '1rem',
+                                    background: 'rgba(230, 165, 32, 0.1)',
+                                    borderRadius: '8px',
+                                    margin: '0.5rem 0'
+                                }}>
+                                    <img
+                                        src={user.avatar}
+                                        alt="Profile"
+                                        style={{
+                                            width: '50px',
+                                            height: '50px',
+                                            borderRadius: '50%',
+                                            border: '2px solid var(--color-gold)',
+                                            objectFit: 'cover'
+                                        }}
+                                    />
+                                    <div style={{ flex: 1, textAlign: 'left' }}>
+                                        <div style={{
+                                            fontSize: '1rem',
+                                            fontWeight: 'bold',
+                                            color: '#000000',
+                                            marginBottom: '0.25rem'
+                                        }}>
+                                            @{user.username}
+                                        </div>
+                                        <div style={{
+                                            fontSize: '0.85rem',
+                                            color: '#7A4A00',
+                                            opacity: 0.7
+                                        }}>
+                                            {user.email}
+                                        </div>
+                                    </div>
+                                </div>
+
                                 <button
                                     onClick={() => {
                                         setIsProfileModalOpen(true);
@@ -319,12 +386,13 @@ const Navbar = () => {
                                         border: 'none',
                                         color: '#7A4A00',
                                         fontSize: '1.1rem',
-                                        padding: '0.5rem 0',
+                                        padding: '0.75rem 0',
                                         cursor: 'pointer',
-                                        fontWeight: '500'
+                                        fontWeight: '500',
+                                        width: '100%'
                                     }}
                                 >
-                                    My Profile
+                                    👤 My Profile
                                 </button>
                                 <button
                                     onClick={() => {
@@ -336,12 +404,13 @@ const Navbar = () => {
                                         border: 'none',
                                         color: '#ff6b6b',
                                         fontSize: '1.1rem',
-                                        padding: '0.5rem 0',
+                                        padding: '0.75rem 0',
                                         cursor: 'pointer',
-                                        fontWeight: '500'
+                                        fontWeight: '500',
+                                        width: '100%'
                                     }}
                                 >
-                                    Logout
+                                    🚪 Logout
                                 </button>
                             </>
                         ) : (

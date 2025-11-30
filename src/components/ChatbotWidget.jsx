@@ -17,11 +17,22 @@ const ChatbotWidget = () => {
     ]);
     const [input, setInput] = useState('');
     const [isLoading, setIsLoading] = useState(false);
+    const [apiError, setApiError] = useState(false);
     const messagesEndRef = useRef(null);
 
-    // Initialize Gemini API
-    const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    // Check API key availability
+    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
+
+    // Initialize Gemini API only if key exists
+    let genAI = null;
+    let model = null;
+
+    if (apiKey) {
+        genAI = new GoogleGenerativeAI(apiKey);
+        model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
+    } else {
+        console.error('⚠️ Gemini API key not found. Please configure VITE_GEMINI_API_KEY in your environment variables.');
+    }
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -34,6 +45,20 @@ const ChatbotWidget = () => {
     const handleSend = async (e) => {
         e.preventDefault();
         if (!input.trim() || isLoading) return;
+
+        // Check if API key is available
+        if (!apiKey || !model) {
+            setMessages(prev => [...prev,
+            { type: 'user', text: input },
+            {
+                type: 'bot',
+                text: '⚠️ Chatbot is currently unavailable. The API key is not configured. Please contact the administrator or try again later.'
+            }
+            ]);
+            setInput('');
+            setApiError(true);
+            return;
+        }
 
         // Add user message
         const userMessage = { type: 'user', text: input };
@@ -158,10 +183,10 @@ User question: ${currentInput}`;
                 onClick={() => setIsOpen(!isOpen)}
                 style={{
                     position: 'fixed',
-                    bottom: '2rem',
-                    right: '2rem',
-                    width: '60px',
-                    height: '60px',
+                    bottom: '1.5rem',
+                    right: '1.5rem',
+                    width: window.innerWidth <= 768 ? '55px' : '60px',
+                    height: window.innerWidth <= 768 ? '55px' : '60px',
                     borderRadius: '50%',
                     background: 'var(--color-merlot)',
                     border: '2px solid var(--color-gold)',
@@ -185,16 +210,19 @@ User question: ${currentInput}`;
             {isOpen && (
                 <div className="glass-card" style={{
                     position: 'fixed',
-                    bottom: '7rem',
-                    right: '2rem',
-                    width: '350px',
-                    height: '500px',
+                    bottom: window.innerWidth <= 768 ? '0' : '7rem',
+                    right: window.innerWidth <= 768 ? '0' : '2rem',
+                    left: window.innerWidth <= 768 ? '0' : 'auto',
+                    width: window.innerWidth <= 768 ? '100%' : '350px',
+                    height: window.innerWidth <= 768 ? '100vh' : '500px',
+                    maxHeight: window.innerWidth <= 768 ? '100vh' : '80vh',
                     zIndex: 1000,
                     display: 'flex',
                     flexDirection: 'column',
                     padding: 0,
                     overflow: 'hidden',
                     animation: 'slideInUp 0.3s ease-out',
+                    borderRadius: window.innerWidth <= 768 ? '0' : '12px',
                 }}>
                     {/* Header */}
                     <div style={{
