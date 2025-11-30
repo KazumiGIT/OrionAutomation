@@ -10,6 +10,7 @@ const Navbar = () => {
     const [isDropdownOpen, setIsDropdownOpen] = useState(false);
     const [isProfileModalOpen, setIsProfileModalOpen] = useState(false);
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
+    const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const location = useLocation();
     const { user, logout } = useUser();
 
@@ -17,8 +18,19 @@ const Navbar = () => {
         const handleScroll = () => {
             setScrolled(window.scrollY > 50);
         };
+
+        const handleResize = () => {
+            if (window.innerWidth > 768) {
+                setIsMobileMenuOpen(false);
+            }
+        };
+
         window.addEventListener('scroll', handleScroll);
-        return () => window.removeEventListener('scroll', handleScroll);
+        window.addEventListener('resize', handleResize);
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+            window.removeEventListener('resize', handleResize);
+        };
     }, []);
 
     // Default guest avatar - using Boring Avatars style
@@ -27,6 +39,14 @@ const Navbar = () => {
     };
 
     const defaultAvatar = getAvatar('guest');
+
+    const navLinks = [
+        { path: '/', label: 'Home' },
+        { path: '/ai-chatbot', label: 'AI Chatbots' },
+        { path: '/website', label: 'Websites' },
+        { path: '/marketing', label: 'Marketing' },
+        { path: '/website-portfolio', label: 'Portfolio' }
+    ];
 
     return (
         <>
@@ -57,7 +77,8 @@ const Navbar = () => {
                     width: '100%',
                     maxWidth: '1400px',
                     margin: '0 auto',
-                    padding: '0 2rem'
+                    padding: '0 2rem',
+                    position: 'relative'
                 }}>
                     {/* Logo */}
                     <Link to="/" className="logo" style={{
@@ -77,79 +98,30 @@ const Navbar = () => {
                         ORION
                     </Link>
 
-                    {/* Navigation Links */}
-                    <div style={{
-                        display: 'flex',
-                        alignItems: 'center',
-                        gap: '2rem',
-                        flex: 1,
-                        justifyContent: 'center'
-                    }}>
-                        <Link
-                            to="/"
-                            className="nav-link"
-                            style={{
-                                color: location.pathname === '/' ? '#E6A520' : '#7A4A00',
-                                textDecoration: 'none',
-                                fontWeight: location.pathname === '/' ? '600' : '500',
-                                fontSize: '1rem',
-                                transition: 'all 0.3s ease',
-                                position: 'relative',
-                                padding: '0.5rem 0'
-                            }}
-                        >
-                            Home
-                        </Link>
-                        <Link
-                            to="/ai-chatbot"
-                            className="nav-link"
-                            style={{
-                                color: location.pathname === '/ai-chatbot' ? '#E6A520' : '#7A4A00',
-                                textDecoration: 'none',
-                                fontWeight: location.pathname === '/ai-chatbot' ? '600' : '500',
-                                fontSize: '1rem',
-                                transition: 'all 0.3s ease',
-                                position: 'relative',
-                                padding: '0.5rem 0'
-                            }}
-                        >
-                            AI Chatbots
-                        </Link>
-                        <Link
-                            to="/website"
-                            className="nav-link"
-                            style={{
-                                color: location.pathname === '/website' ? '#E6A520' : '#7A4A00',
-                                textDecoration: 'none',
-                                fontWeight: location.pathname === '/website' ? '600' : '500',
-                                fontSize: '1rem',
-                                transition: 'all 0.3s ease',
-                                position: 'relative',
-                                padding: '0.5rem 0'
-                            }}
-                        >
-                            Websites
-                        </Link>
-                        <Link
-                            to="/marketing"
-                            className="nav-link"
-                            style={{
-                                color: location.pathname === '/marketing' ? '#E6A520' : '#7A4A00',
-                                textDecoration: 'none',
-                                fontWeight: location.pathname === '/marketing' ? '600' : '500',
-                                fontSize: '1rem',
-                                transition: 'all 0.3s ease',
-                                position: 'relative',
-                                padding: '0.5rem 0'
-                            }}
-                        >
-                            Marketing
-                        </Link>
+                    {/* Desktop Navigation Links */}
+                    <div className="nav-links-desktop">
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.path}
+                                to={link.path}
+                                className="nav-link"
+                                style={{
+                                    color: location.pathname === link.path ? '#E6A520' : '#7A4A00',
+                                    textDecoration: 'none',
+                                    fontWeight: location.pathname === link.path ? '600' : '500',
+                                    fontSize: '1rem',
+                                    transition: 'all 0.3s ease',
+                                    position: 'relative',
+                                    padding: '0.5rem 0'
+                                }}
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
                     </div>
 
-                    {/* Profile Section */}
-                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem' }}>
-                        {/* Profile Picture Button */}
+                    {/* Profile Section (Desktop) */}
+                    <div className="nav-links-desktop" style={{ flex: '0 0 auto' }}>
                         <div style={{ position: 'relative' }}>
                             <button
                                 onClick={() => setIsDropdownOpen(!isDropdownOpen)}
@@ -165,8 +137,6 @@ const Navbar = () => {
                                     transition: 'all 0.3s ease',
                                     boxShadow: isDropdownOpen ? '0 0 20px rgba(197, 168, 128, 0.5)' : 'none'
                                 }}
-                                onMouseEnter={(e) => e.currentTarget.style.boxShadow = '0 0 20px rgba(197, 168, 128, 0.5)'}
-                                onMouseLeave={(e) => e.currentTarget.style.boxShadow = isDropdownOpen ? '0 0 20px rgba(197, 168, 128, 0.5)' : 'none'}
                             >
                                 <img
                                     src={user ? getAvatar(user.email) : defaultAvatar}
@@ -180,7 +150,7 @@ const Navbar = () => {
                                 />
                             </button>
 
-                            {/* Enhanced Dropdown Menu */}
+                            {/* Dropdown Menu */}
                             {isDropdownOpen && (
                                 <div className="glass-card fade-in" style={{
                                     position: 'absolute',
@@ -196,10 +166,8 @@ const Navbar = () => {
                                     boxShadow: '0 8px 32px rgba(0, 0, 0, 0.4)',
                                     background: 'rgba(255, 248, 231, 0.95)',
                                     backdropFilter: 'blur(20px)',
-                                    borderRadius: '12px',
-                                    height: 'auto'
+                                    borderRadius: '12px'
                                 }}>
-                                    {/* User Info Header */}
                                     <div style={{
                                         padding: '1.25rem',
                                         background: 'rgba(230, 165, 32, 0.1)',
@@ -244,7 +212,6 @@ const Navbar = () => {
                                         </div>
                                     </div>
 
-                                    {/* Auth/Profile Actions */}
                                     <div style={{ padding: '0.75rem 0 1rem' }}>
                                         {user ? (
                                             <>
@@ -286,44 +253,128 @@ const Navbar = () => {
                                                         width: '100%',
                                                         transition: 'all 0.2s ease'
                                                     }}
-                                                    onMouseEnter={(e) => e.currentTarget.style.background = 'rgba(255, 107, 107, 0.1)'}
-                                                    onMouseLeave={(e) => e.currentTarget.style.background = 'none'}
                                                 >
                                                     🚪 Logout
                                                 </button>
                                             </>
                                         ) : (
-                                            <>
-                                                <button
-                                                    onClick={() => {
-                                                        setIsAuthModalOpen(true);
-                                                        setIsDropdownOpen(false);
-                                                    }}
-                                                    style={{
-                                                        display: 'block',
-                                                        textAlign: 'center',
-                                                        margin: '0 1.25rem 0.75rem',
-                                                        padding: '0.75rem',
-                                                        background: 'var(--color-gold)',
-                                                        color: '#FFF8E7',
-                                                        borderRadius: 'var(--radius-sm)',
-                                                        fontWeight: 'bold',
-                                                        border: 'none',
-                                                        cursor: 'pointer',
-                                                        width: 'calc(100% - 2.5rem)',
-                                                        transition: 'all 0.3s ease'
-                                                    }}
-                                                    onMouseEnter={(e) => e.currentTarget.style.transform = 'translateY(-2px)'}
-                                                    onMouseLeave={(e) => e.currentTarget.style.transform = 'translateY(0)'}
-                                                >
-                                                    🔐 Login / Sign Up
-                                                </button>
-                                            </>
+                                            <button
+                                                onClick={() => {
+                                                    setIsAuthModalOpen(true);
+                                                    setIsDropdownOpen(false);
+                                                }}
+                                                style={{
+                                                    display: 'block',
+                                                    textAlign: 'center',
+                                                    margin: '0 1.25rem 0.75rem',
+                                                    padding: '0.75rem',
+                                                    background: 'var(--color-gold)',
+                                                    color: '#FFF8E7',
+                                                    borderRadius: 'var(--radius-sm)',
+                                                    fontWeight: 'bold',
+                                                    border: 'none',
+                                                    cursor: 'pointer',
+                                                    width: 'calc(100% - 2.5rem)',
+                                                    transition: 'all 0.3s ease'
+                                                }}
+                                            >
+                                                🔐 Login / Sign Up
+                                            </button>
                                         )}
                                     </div>
                                 </div>
                             )}
                         </div>
+                    </div>
+
+                    {/* Hamburger Menu Button */}
+                    <button
+                        className="nav-hamburger"
+                        onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+                    >
+                        <Icon name="menu" size={28} color="#7A4A00" />
+                    </button>
+
+                    {/* Mobile Menu */}
+                    <div className={`mobile-menu ${isMobileMenuOpen ? 'open' : ''}`}>
+                        {navLinks.map((link) => (
+                            <Link
+                                key={link.path}
+                                to={link.path}
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                style={{
+                                    color: location.pathname === link.path ? '#E6A520' : '#7A4A00',
+                                    textDecoration: 'none',
+                                    fontWeight: location.pathname === link.path ? '700' : '500',
+                                    fontSize: '1.1rem',
+                                    padding: '0.5rem 0',
+                                    textAlign: 'center'
+                                }}
+                            >
+                                {link.label}
+                            </Link>
+                        ))}
+
+                        <div style={{ height: '1px', background: 'rgba(230, 165, 32, 0.2)', margin: '0.5rem 0' }} />
+
+                        {user ? (
+                            <>
+                                <button
+                                    onClick={() => {
+                                        setIsProfileModalOpen(true);
+                                        setIsMobileMenuOpen(false);
+                                    }}
+                                    style={{
+                                        background: 'none',
+                                        border: 'none',
+                                        color: '#7A4A00',
+                                        fontSize: '1.1rem',
+                                        padding: '0.5rem 0',
+                                        cursor: 'pointer',
+                                        fontWeight: '500'
+                                    }}
+                                >
+                                    My Profile
+                                </button>
+                                <button
+                                    onClick={() => {
+                                        logout();
+                                        setIsMobileMenuOpen(false);
+                                    }}
+                                    style={{
+                                        background: 'none',
+                                        border: 'none',
+                                        color: '#ff6b6b',
+                                        fontSize: '1.1rem',
+                                        padding: '0.5rem 0',
+                                        cursor: 'pointer',
+                                        fontWeight: '500'
+                                    }}
+                                >
+                                    Logout
+                                </button>
+                            </>
+                        ) : (
+                            <button
+                                onClick={() => {
+                                    setIsAuthModalOpen(true);
+                                    setIsMobileMenuOpen(false);
+                                }}
+                                style={{
+                                    background: 'var(--color-gold)',
+                                    color: '#FFF8E7',
+                                    border: 'none',
+                                    padding: '0.75rem',
+                                    borderRadius: '8px',
+                                    fontSize: '1rem',
+                                    fontWeight: 'bold',
+                                    cursor: 'pointer',
+                                    marginTop: '0.5rem'
+                                }}
+                            >
+                                Login / Sign Up
+                            </button>
+                        )}
                     </div>
                 </div>
             </nav>
