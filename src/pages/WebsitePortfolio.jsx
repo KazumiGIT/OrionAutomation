@@ -16,13 +16,13 @@ const WebsitePortfolio = () => {
         },
         {
             id: 2,
-            title: 'E-Commerce Platform',
-            category: 'Online Store',
-            description: 'Modern e-commerce solution with seamless checkout and inventory management',
-            image: 'https://images.unsplash.com/photo-1557821552-17105176677c?w=600&h=400&fit=crop',
-            link: '#',
-            tags: ['React', 'Node.js', 'Stripe'],
-            isExternal: false
+            title: 'HOTZILLA',
+            category: 'Restaurant Website',
+            description: 'Spicy Korean-fusion restaurant with bold design and interactive menu showcasing fire-meets-flavor experience',
+            image: '/hotzilla-logo.jpg',
+            link: '/hotzilla',
+            tags: ['HTML/CSS', 'JavaScript', 'Responsive'],
+            isExternal: true
         },
         {
             id: 3,

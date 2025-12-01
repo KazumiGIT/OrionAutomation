@@ -11,6 +11,7 @@ import AIChatbot from './pages/AIChatbot';
 import Website from './pages/Website';
 import WebsitePortfolio from './pages/WebsitePortfolio';
 import SumikaViewer from './pages/SumikaViewer';
+import HotzillaViewer from './pages/HotzillaViewer';
 import Marketing from './pages/Marketing';
 import Auth from './pages/Auth';
 import Profile from './pages/Profile';
@@ -35,6 +36,7 @@ function App() {
                                 <Route path="/website" element={<Website />} />
                                 <Route path="/website-portfolio" element={<WebsitePortfolio />} />
                                 <Route path="/sumika" element={<SumikaViewer />} />
+                                <Route path="/hotzilla" element={<HotzillaViewer />} />
                                 <Route path="/marketing" element={<Marketing />} />
                                 <Route path="/auth" element={<Auth />} />
                                 <Route path="/profile" element={<Profile />} />
