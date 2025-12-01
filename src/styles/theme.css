@@ -107,19 +107,20 @@
 
 .mobile-menu {
   display: none;
-  position: absolute;
-  top: 100%;
+  position: fixed;
+  top: 70px;
   left: 0;
   right: 0;
+  width: 100vw;
   background: rgba(255, 248, 231, 0.98);
   backdrop-filter: blur(20px);
-  padding: 0.5rem 0.75rem;
+  padding: 1rem;
   flex-direction: column;
   gap: 0.4rem;
   border-bottom: 1px solid rgba(230, 165, 32, 0.2);
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
   animation: slideDown 0.3s ease-out;
-  max-height: calc(100vh - 80px);
+  max-height: calc(100vh - 70px);
   overflow-y: auto;
   overflow-x: hidden;
   z-index: 9999;
@@ -147,7 +148,7 @@
   .bento-item,
   .bento-item.large,
   .bento-item.wide,
-  .bento-item.full {
+  .bento-item. full {
     grid-column: span 1;
   }
 
