@@ -148,7 +148,7 @@
   .bento-item,
   .bento-item.large,
   .bento-item.wide,
-  .bento-item. full {
+  .bento-item.full {
     grid-column: span 1;
   }
 

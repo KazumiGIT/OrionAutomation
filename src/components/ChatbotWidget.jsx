@@ -214,15 +214,15 @@ User question: ${currentInput}`;
                     right: window.innerWidth <= 768 ? '0' : '2rem',
                     left: window.innerWidth <= 768 ? '0' : 'auto',
                     width: window.innerWidth <= 768 ? '100%' : '350px',
-                    height: window.innerWidth <= 768 ? '100vh' : '500px',
-                    maxHeight: window.innerWidth <= 768 ? '100vh' : '80vh',
+                    height: window.innerWidth <= 768 ? '85vh' : '500px',
+                    maxHeight: window.innerWidth <= 768 ? '85vh' : '80vh',
                     zIndex: 1000,
                     display: 'flex',
                     flexDirection: 'column',
                     padding: 0,
                     overflow: 'hidden',
                     animation: 'slideInUp 0.3s ease-out',
-                    borderRadius: window.innerWidth <= 768 ? '0' : '12px',
+                    borderRadius: window.innerWidth <= 768 ? '16px 16px 0 0' : '12px',
                 }}>
                     {/* Header */}
                     <div style={{
