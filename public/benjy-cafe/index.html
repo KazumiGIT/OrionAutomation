@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Benjy Cafe - A cozy bistro in Subang Jaya serving delicious comfort food">
+    <title>Benjy Cafe | Cozy Bistro in Subang Jaya</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@400;600;700;900&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+    <!-- Navigation -->
+    <nav class="navbar" id="navbar">
+        <div class="nav-container">
+            <a href="#home" class="logo">Benjy Cafe</a>
+            <button class="mobile-menu-toggle" id="mobileMenuToggle" aria-label="Toggle menu">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="nav-link">Home</a></li>
+                <li><a href="#about" class="nav-link">About</a></li>
+                <li><a href="#menu" class="nav-link">Menu</a></li>
+                <li><a href="#contact" class="nav-link">Contact</a></li>
+            </ul>
+            <a href="#contact" class="nav-cta">Visit Us</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+        <div class="hero-content">
+            <h1 class="hero-title">
+                <span class="line">Benjy Cafe</span>
+            </h1>
+            <p class="hero-subtitle">where every meal feels like home</p>
+            <a href="#menu" class="hero-cta">see menu</a>
+        </div>
+        <div class="scroll-hint">scroll to explore</div>
+    </section>
+
+    <!-- Intro Section -->
+    <section class="intro-section">
+        <div class="intro-content">
+            <h2 class="intro-title">cozy bistro in subang jaya. elevate your palate, warm your soul.</h2>
+        </div>
+    </section>
+
+    <!-- Food Showcase 1 - Mussels -->
+    <section class="food-showcase" data-bg="#2C1810">
+        <div class="food-grid">
+            <div class="food-image">
+                <img src="images/mussels.jpg" alt="Garlic Mussels" loading="lazy">
+            </div>
+            <div class="food-info">
+                <h3 class="food-name">Garlic Mussels</h3>
+                <p class="food-description">Fresh mussels cooked in white wine, garlic, and herbs. Served with warm
+                    garlic bread for the perfect combination.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Food Showcase 2 - Steak -->
+    <section class="food-showcase" data-bg="#654321">
+        <div class="food-grid reverse">
+            <div class="food-image">
+                <img src="images/steak.jpg" alt="Grilled Steak" loading="lazy">
+            </div>
+            <div class="food-info">
+                <h3 class="food-name">Grilled Steak</h3>
+                <p class="food-description">Tender, juicy steak grilled to perfection. Served with golden fries, fresh
+                    vegetables, and our signature sauce.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Food Showcase 3 - Pasta -->
+    <section class="food-showcase" data-bg="#8B4513">
+        <div class="food-grid">
+            <div class="food-image">
+                <img src="images/pasta.jpg" alt="Creamy Pasta" loading="lazy">
+            </div>
+            <div class="food-info">
+                <h3 class="food-name">Creamy Pasta</h3>
+                <p class="food-description">Al dente pasta tossed in our rich, creamy sauce with parmesan cheese and
+                    fresh herbs. Pure comfort in every bite.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Food Showcase 4 - Fish -->
+    <section class="food-showcase" data-bg="#A0522D">
+        <div class="food-grid reverse">
+            <div class="food-image">
+                <img src="images/fish.jpg" alt="Pan-Seared Fish" loading="lazy">
+            </div>
+            <div class="food-info">
+                <h3 class="food-name">Pan-Seared Fish</h3>
+                <p class="food-description">Perfectly seared fish fillet with crispy skin, served with fries, grilled
+                    vegetables, and a lemon wedge.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section class="menu-section" id="menu">
+        <div class="menu-header">
+            <h2 class="section-title">our menu</h2>
+        </div>
+
+        <div class="menu-categories">
+            <div class="menu-category">
+                <h3 class="category-title">breakfast & brunch</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4>Big Breakfast</h4>
+                            <span class="price">RM 18</span>
+                        </div>
+                        <p class="item-desc">Eggs, sausages, bacon, baked beans, toast</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4>French Toast</h4>
+                            <span class="price">RM 12</span>
+                        </div>
+                        <p class="item-desc">Classic with maple syrup & butter</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4>Eggs Benedict</h4>
+                            <span class="price">RM 16</span>
+                        </div>
+                        <p class="item-desc">Poached eggs, hollandaise sauce</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <h3 class="category-title">mains & pasta</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4>Grilled Chicken Chop</h4>
+                            <span class="price">RM 22</span>
+                        </div>
+                        <p class="item-desc">With mashed potatoes & vegetables</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4>Carbonara Pasta</h4>
+                            <span class="price">RM 18</span>
+                        </div>
+                        <p class="item-desc">Creamy sauce with bacon</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4>Fish & Chips</h4>
+                            <span class="price">RM 20</span>
+                        </div>
+                        <p class="item-desc">Crispy battered fish with fries</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <h3 class="category-title">beverages</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4>Specialty Coffee</h4>
+                            <span class="price">RM 8</span>
+                        </div>
+                        <p class="item-desc">Latte, Cappuccino, Americano</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4>Fresh Juices</h4>
+                            <span class="price">RM 10</span>
+                        </div>
+                        <p class="item-desc">Orange, Apple, Watermelon</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4>Milkshakes</h4>
+                            <span class="price">RM 12</span>
+                        </div>
+                        <p class="item-desc">Chocolate, Vanilla, Strawberry</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="menu-category">
+                <h3 class="category-title">desserts</h3>
+                <div class="menu-items">
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4>Chocolate Cake</h4>
+                            <span class="price">RM 10</span>
+                        </div>
+                        <p class="item-desc">Rich & moist chocolate delight</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4>Cheesecake</h4>
+                            <span class="price">RM 12</span>
+                        </div>
+                        <p class="item-desc">New York style with berry compote</p>
+                    </div>
+                    <div class="menu-item">
+                        <div class="item-header">
+                            <h4>Ice Cream</h4>
+                            <span class="price">RM 8</span>
+                        </div>
+                        <p class="item-desc">Assorted flavors</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-content">
+            <h2 class="cta-title">deliciously bold in every bite</h2>
+            <a href="#contact" class="cta-button">visit us today</a>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-grid">
+            <div class="contact-info">
+                <h2 class="section-title">visit us</h2>
+
+                <div class="info-block">
+                    <h3>Location</h3>
+                    <p>E-Tiara Apartments<br>SS15, Subang Jaya<br>Selangor, Malaysia</p>
+                </div>
+
+                <div class="info-block">
+                    <h3>Hours</h3>
+                    <p>Monday - Sunday<br>9:00 AM - 10:00 PM</p>
+                </div>
+
+                <div class="info-block">
+                    <h3>Contact</h3>
+                    <p>Phone: +60 3-XXXX XXXX<br>Email: hello@benjycafe.com</p>
+                </div>
+
+                <div class="social-links">
+                    <a href="https://www.facebook.com/benjycafe/" target="_blank" rel="noopener" aria-label="Facebook">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="currentColor">
+                            <path
+                                d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                        </svg>
+                    </a>
+                    <a href="https://maps.app.goo.gl/piWcfYsWzZT918bb9" target="_blank" rel="noopener"
+                        aria-label="Google Maps">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"
+                            fill="currentColor">
+                            <path
+                                d="M12 0c-4.198 0-8 3.403-8 7.602 0 4.198 3.469 9.21 8 16.398 4.531-7.188 8-12.2 8-16.398 0-4.199-3.801-7.602-8-7.602zm0 11c-1.657 0-3-1.343-3-3s1.343-3 3-3 3 1.343 3 3-1.343 3-3 3z" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+
+            <div class="contact-map">
+                <iframe
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3984.0267890123456!2d101.5789!3d3.0789!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zM8KwMDQnNDQuMCJOIDEwMcKwMzQnNDQuMCJF!5e0!3m2!1sen!2smy!4v1234567890"
+                    width="100%" height="100%" style="border:0;" allowfullscreen="" loading="lazy"
+                    referrerpolicy="no-referrer-when-downgrade">
+                </iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-brand">
+                <h3>Benjy Cafe</h3>
+                <p>E-Tiara, SS15, Subang Jaya</p>
+            </div>
+            <p class="footer-copy">&copy; 2024 Benjy Cafe. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <script src="script.js"></script>
+</body>
+
+</html>

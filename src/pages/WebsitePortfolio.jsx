@@ -26,13 +26,13 @@ const WebsitePortfolio = () => {
         },
         {
             id: 3,
-            title: 'Corporate Business Site',
-            category: 'Corporate Website',
-            description: 'Professional corporate website with team profiles and service showcases',
-            image: 'https://images.unsplash.com/photo-1497366216548-37526070297c?w=600&h=400&fit=crop',
-            link: '#',
-            tags: ['WordPress', 'Custom Theme', 'SEO'],
-            isExternal: false
+            title: 'Benjy Cafe',
+            category: 'Cafe Website',
+            description: 'Cozy cafe website with warm design, menu showcase, and inviting atmosphere for coffee lovers',
+            image: '/benjy-cafe-logo.jpg',
+            link: '/benjy-cafe',
+            tags: ['HTML/CSS', 'JavaScript', 'Responsive'],
+            isExternal: true
         },
         {
             id: 4,

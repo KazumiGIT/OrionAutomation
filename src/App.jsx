@@ -12,6 +12,7 @@ import Website from './pages/Website';
 import WebsitePortfolio from './pages/WebsitePortfolio';
 import SumikaViewer from './pages/SumikaViewer';
 import HotzillaViewer from './pages/HotzillaViewer';
+import BenjyCafeViewer from './pages/BenjyCafeViewer';
 import Marketing from './pages/Marketing';
 import Auth from './pages/Auth';
 import Profile from './pages/Profile';
@@ -37,6 +38,7 @@ function App() {
                                 <Route path="/website-portfolio" element={<WebsitePortfolio />} />
                                 <Route path="/sumika" element={<SumikaViewer />} />
                                 <Route path="/hotzilla" element={<HotzillaViewer />} />
+                                <Route path="/benjy-cafe" element={<BenjyCafeViewer />} />
                                 <Route path="/marketing" element={<Marketing />} />
                                 <Route path="/auth" element={<Auth />} />
                                 <Route path="/profile" element={<Profile />} />
