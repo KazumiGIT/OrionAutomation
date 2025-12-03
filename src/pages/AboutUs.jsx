@@ -1,8 +1,15 @@
 import React from 'react';
+import SEO from '../components/SEO';
 
 const AboutUs = () => {
     return (
         <div style={{ position: 'relative', minHeight: '100vh' }}>
+            <SEO
+                title="About Us"
+                description="Learn about Orion Automation, our mission, values, and the team behind our AI-powered solutions. We empower businesses with intelligent automation."
+                keywords="about Orion Automation, AI company, automation experts, digital transformation, our story, mission, values"
+                canonical="/about-us"
+            />
             {/* Hero Section */}
             <section className="section" style={{ paddingTop: '8rem' }}>
                 <div className="container text-center">

@@ -2,10 +2,17 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import Icon from '../components/Icons';
 import AnimatedBackground from '../components/AnimatedBackground';
+import SEO from '../components/SEO';
 
 const Marketing = () => {
     return (
         <div style={{ minHeight: '100vh', paddingTop: '80px' }}>
+            <SEO
+                title="Strategic Marketing"
+                description="Data-driven marketing strategies to grow your business. SEO, social media, and PPC campaigns that deliver real ROI."
+                keywords="digital marketing, SEO, social media marketing, PPC, online advertising, growth marketing, Malaysia"
+                canonical="/marketing"
+            />
             {/* Hero Section */}
             <section className="section" style={{
                 padding: '6rem 2rem',

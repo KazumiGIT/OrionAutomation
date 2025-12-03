@@ -4,6 +4,7 @@ import PricingCard from '../components/PricingCard';
 import TestimonialCard from '../components/TestimonialCard';
 import Icon from '../components/Icons';
 import AnimatedBackground from '../components/AnimatedBackground';
+import SEO from '../components/SEO';
 
 const AIChatbot = () => {
     const plans = [
@@ -74,8 +75,32 @@ const AIChatbot = () => {
         }
     ];
 
+    const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "AI Chatbot Development",
+        "provider": {
+            "@type": "Organization",
+            "name": "Orion Automation"
+        },
+        "areaServed": "Malaysia",
+        "description": "Intelligent 24/7 customer support agents that learn and adapt. Automate customer conversations, bookings, and support across WhatsApp, Messenger, and Instagram.",
+        "offers": {
+            "@type": "Offer",
+            "price": "399",
+            "priceCurrency": "MYR"
+        }
+    };
+
     return (
         <div style={{ minHeight: '100vh', paddingTop: '80px' }}>
+            <SEO
+                title="AI Chatbots"
+                description="Automate your customer service with intelligent AI chatbots. 24/7 support on WhatsApp, Messenger, and Instagram. Increase conversions and save time."
+                keywords="AI chatbot, WhatsApp chatbot, Messenger bot, Instagram automation, customer service automation, Malaysia"
+                canonical="/ai-chatbot"
+                structuredData={structuredData}
+            />
             {/* Hero Section */}
             <section className="section" style={{
                 padding: '6rem 2rem',

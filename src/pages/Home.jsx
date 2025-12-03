@@ -6,6 +6,7 @@ import ScrollObserver from '../components/ScrollObserver';
 import Icon from '../components/Icons';
 import AnimatedBackground from '../components/AnimatedBackground';
 import Button from '../components/Button';
+import SEO from '../components/SEO';
 
 const Home = () => {
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -68,6 +69,23 @@ const Home = () => {
         { icon: 'rocket', title: 'Launch', desc: 'We deploy, monitor, and optimize for growth.' }
     ];
 
+    const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "Orion Automation",
+        "url": "https://orionautomation.xyz",
+        "logo": "https://orionautomation.xyz/favicon.jpg",
+        "sameAs": [
+            "https://www.facebook.com/orionautomation",
+            "https://twitter.com/orionautomation"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "telephone": "+601154455435",
+            "contactType": "customer service"
+        }
+    };
+
     return (
         <motion.div
             initial={{ opacity: 0 }}
@@ -76,6 +94,13 @@ const Home = () => {
             transition={{ duration: 0.8 }}
             style={{ minHeight: '100vh', paddingTop: '6rem', paddingBottom: '4rem' }}
         >
+            <SEO
+                title="Home"
+                description="Orion Automation provides cutting-edge AI chatbots and premium website development services to transform your business. Elevate your digital presence today."
+                keywords="AI chatbot, website development, automation, digital marketing, Orion Automation, Malaysia"
+                canonical="/"
+                structuredData={structuredData}
+            />
             <ServiceModal isOpen={isModalOpen} onClose={() => setIsModalOpen(false)} />
 
             <div className="container">

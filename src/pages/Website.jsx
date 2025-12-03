@@ -5,6 +5,7 @@ import PricingCard from '../components/PricingCard';
 import TestimonialCard from '../components/TestimonialCard';
 import Icon from '../components/Icons';
 import AnimatedBackground from '../components/AnimatedBackground';
+import SEO from '../components/SEO';
 
 const Website = () => {
     const packages = [
@@ -80,8 +81,32 @@ const Website = () => {
         }
     ];
 
+    const structuredData = {
+        "@context": "https://schema.org",
+        "@type": "Service",
+        "serviceType": "Website Development",
+        "provider": {
+            "@type": "Organization",
+            "name": "Orion Automation"
+        },
+        "areaServed": "Malaysia",
+        "description": "Stunning, high-performance websites designed to convert. Custom design, mobile-first, and SEO ready.",
+        "offers": {
+            "@type": "Offer",
+            "price": "2999",
+            "priceCurrency": "MYR"
+        }
+    };
+
     return (
         <div style={{ minHeight: '100vh', paddingTop: '80px' }}>
+            <SEO
+                title="Premium Website Development"
+                description="Get a stunning, high-performance website designed to convert. Custom design, mobile-first, and SEO optimized. Transform your digital presence."
+                keywords="website development, web design, custom website, e-commerce, SEO, mobile responsive, Malaysia"
+                canonical="/website"
+                structuredData={structuredData}
+            />
             {/* Hero Section */}
             <section className="section" style={{
                 padding: '6rem 2rem',
