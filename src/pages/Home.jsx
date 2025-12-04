@@ -74,7 +74,7 @@ const Home = () => {
         "@type": "Organization",
         "name": "Orion Automation",
         "url": "https://orionautomation.xyz",
-        "logo": "https://orionautomation.xyz/favicon.jpg",
+        "logo": "https://orionautomation.xyz/favicon.png",
         "sameAs": [
             "https://www.facebook.com/orionautomation",
             "https://twitter.com/orionautomation"
