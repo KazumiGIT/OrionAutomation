@@ -72,7 +72,7 @@ const Navbar = () => {
         { path: '/ai-chatbot', label: 'AI Chatbots' },
         { path: '/website', label: 'Websites' },
         { path: '/marketing', label: 'Marketing' },
-        { path: '/website-portfolio', label: 'Portfolio' }
+        // { path: '/website-portfolio', label: 'Portfolio' }
     ];
 
     return (
