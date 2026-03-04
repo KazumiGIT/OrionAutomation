@@ -171,7 +171,7 @@ const Website = () => {
             </section>
 
             {/* Portfolio Button Section */}
-            <section className="section" style={{ padding: '2rem 0', background: 'rgba(230, 165, 32, 0.03)' }}>
+            {/* <section className="section" style={{ padding: '2rem 0', background: 'rgba(230, 165, 32, 0.03)' }}>
                 <div className="container" style={{ textAlign: 'center' }}>
                     <div className="glass-card" style={{ padding: '2rem', display: 'inline-block' }}>
                         <h3 style={{ color: '#7A4A00', marginBottom: '1rem', fontSize: '1.5rem' }}>
@@ -207,7 +207,7 @@ const Website = () => {
                         </Link>
                     </div>
                 </div>
-            </section>
+            </section> */}
 
             {/* Philosophy */}
             <section className="section" style={{ padding: '4rem 2rem' }}>
