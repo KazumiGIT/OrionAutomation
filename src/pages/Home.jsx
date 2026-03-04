@@ -81,7 +81,7 @@ const Home = () => {
         ],
         "contactPoint": {
             "@type": "ContactPoint",
-            "telephone": "+601154455435",
+            "telephone": "601117993797",
             "contactType": "customer service"
         }
     };
@@ -137,7 +137,7 @@ const Home = () => {
                                 <Button onClick={() => setIsModalOpen(true)} variant="primary" size="large">
                                     Explore Services
                                 </Button>
-                                <Button href="https://wa.me/601154455435" target="_blank" rel="noopener noreferrer" variant="outline" size="large">
+                                <Button href="https://wa.me/601117993797" target="_blank" rel="noopener noreferrer" variant="outline" size="large">
                                     Contact Us
                                 </Button>
                             </div>

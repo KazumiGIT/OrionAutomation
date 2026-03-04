@@ -46,7 +46,7 @@ const Marketing = () => {
                             Data-driven marketing that turns clicks into customers
                         </p>
                         <a
-                            href="https://wa.me/601154455435"
+                            href="https://wa.me/601117993797"
                             target="_blank"
                             rel="noopener noreferrer"
                             style={{
@@ -195,7 +195,7 @@ const Marketing = () => {
                             Let's build a marketing strategy that actually works
                         </p>
                         <a
-                            href="https://wa.me/601154455435"
+                            href="https://wa.me/601117993797"
                             target="_blank"
                             rel="noopener noreferrer"
                             style={{

@@ -43,8 +43,8 @@ const Footer = () => {
                         </h4>
                         <p style={{ opacity: 0.7, fontSize: '0.9rem' }}>
                             Email: marketing@orionautomation.xyz<br />
-                            <a href="https://wa.me/601154455435" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>
-                                WhatsApp: +60 11-5445 5435
+                            <a href="https://wa.me/601117993797" target="_blank" rel="noopener noreferrer" style={{ color: 'inherit', textDecoration: 'none' }}>
+                                WhatsApp: +60 11-1799 3797
                             </a>
                         </p>
                     </div>

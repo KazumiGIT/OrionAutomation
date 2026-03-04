@@ -290,7 +290,7 @@ const WebsitePortfolio = () => {
                             Let's create something amazing together. Contact me to discuss your project.
                         </p>
                         <a
-                            href="https://wa.me/601154455435"
+                            href="https://wa.me/601117993797"
                             target="_blank"
                             rel="noopener noreferrer"
                             style={{

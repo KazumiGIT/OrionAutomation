@@ -134,7 +134,7 @@ const AIChatbot = () => {
                             Automate customer conversations, bookings, and support 24/7 across WhatsApp, Messenger, and Instagram
                         </p>
                         <a
-                            href="https://wa.me/601154455435"
+                            href="https://wa.me/601117993797"
                             target="_blank"
                             rel="noopener noreferrer"
                             style={{
@@ -285,7 +285,7 @@ const AIChatbot = () => {
                             Join hundreds of businesses already using AI chatbots to scale their customer service
                         </p>
                         <a
-                            href="https://wa.me/601154455435"
+                            href="https://wa.me/601117993797"
                             target="_blank"
                             rel="noopener noreferrer"
                             style={{

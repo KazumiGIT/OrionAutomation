@@ -140,7 +140,7 @@ const Website = () => {
                             Websites that don't just look good—they convert visitors into customers
                         </p>
                         <a
-                            href="https://wa.me/601154455435"
+                            href="https://wa.me/601117993797"
                             target="_blank"
                             rel="noopener noreferrer"
                             style={{
@@ -392,7 +392,7 @@ const Website = () => {
                             Let's create something amazing together
                         </p>
                         <a
-                            href="https://wa.me/601154455435"
+                            href="https://wa.me/601117993797"
                             target="_blank"
                             rel="noopener noreferrer"
                             style={{
