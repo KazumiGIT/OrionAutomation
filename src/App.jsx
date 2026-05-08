@@ -16,6 +16,7 @@ import BenjyCafeViewer from './pages/BenjyCafeViewer';
 import Marketing from './pages/Marketing';
 import Auth from './pages/Auth';
 import Profile from './pages/Profile';
+import NotFound from './pages/NotFound';
 
 function App() {
     return (
@@ -28,9 +29,10 @@ function App() {
                         display: 'flex',
                         flexDirection: 'column'
                     }}>
+                        <a href="#main-content" className="skip-link">Skip to main content</a>
                         <LightweightBackground />
                         <Navbar />
-                        <main style={{ flex: 1 }}>
+                        <main id="main-content" style={{ flex: 1 }}>
                             <Routes>
                                 <Route path="/" element={<Home />} />
                                 <Route path="/ai-chatbot" element={<AIChatbot />} />
@@ -42,6 +44,7 @@ function App() {
                                 <Route path="/marketing" element={<Marketing />} />
                                 <Route path="/auth" element={<Auth />} />
                                 <Route path="/profile" element={<Profile />} />
+                                <Route path="*" element={<NotFound />} />
                             </Routes>
                         </main>
                         <Footer />

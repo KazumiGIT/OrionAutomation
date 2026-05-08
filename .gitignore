@@ -27,3 +27,10 @@ dist-ssr
 .env
 .env.local
 .env.*.local
+
+
+MD FIles
+*.md
+*.markdown
+AUDIT.md
+POLISH-GUIDE.md
