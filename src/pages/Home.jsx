@@ -12,22 +12,16 @@ const Home = () => {
 
     const services = [
         {
-            icon: 'chatbot',
-            title: 'AI Chatbots',
-            description: 'Intelligent 24/7 customer support agents that learn and adapt.',
-            link: '/ai-chatbot'
+            icon: 'sync',
+            title: 'AI Automation Workflow',
+            description: 'Automation workflows, pipeline automation, and production internal system automation.',
+            link: '/ai-automation'
         },
         {
             icon: 'website',
             title: 'Premium Websites',
-            description: 'Stunning, high-performance websites designed to convert.',
+            description: 'High-performance websites with AI Chatbot integration and Modern Marketing (SEO/AEO/GEO) built in.',
             link: '/website'
-        },
-        {
-            icon: 'marketing',
-            title: 'Strategic Marketing',
-            description: 'Data-driven campaigns that maximize ROI.',
-            link: '/marketing'
         }
     ];
 
@@ -121,8 +115,8 @@ const Home = () => {
         >
             <SEO
                 title="Home"
-                description="Orion Automation provides cutting-edge AI chatbots and premium website development services to transform your business. Elevate your digital presence today."
-                keywords="AI chatbot, website development, automation, digital marketing, Orion Automation, Malaysia"
+                description="Orion Automation builds AI automation workflows, pipeline automation, production internal system automation, and premium websites with AI Chatbots and Modern Marketing (SEO/AEO/GEO) built in."
+                keywords="AI automation, workflow automation, pipeline automation, internal system automation, website development, AI chatbot, SEO, AEO, GEO, Orion Automation, Malaysia"
                 canonical="/"
                 structuredData={structuredData}
             />
@@ -177,9 +171,9 @@ const Home = () => {
                     </div>
 
                     {/* Services Grid */}
-                    <div className="bento-grid" style={{ marginBottom: '4rem' }}>
+                    <div className="grid grid-2" style={{ marginBottom: '4rem', gap: '1.5rem' }}>
                         {services.map((service, index) => (
-                            <div key={index} className="bento-item glass-card hover-lift animate-me" style={{
+                            <div key={index} className="glass-card hover-lift animate-me" style={{
                                 display: 'flex',
                                 flexDirection: 'column',
                                 justifyContent: 'space-between',

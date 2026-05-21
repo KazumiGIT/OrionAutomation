@@ -7,20 +7,26 @@ const ServiceModal = ({ isOpen, onClose }) => {
 
     const services = [
         {
-            title: 'AI Chatbot',
-            description: 'Automate customer interactions 24/7.',
-            link: '/ai-chatbot',
-            icon: '🤖'
+            title: 'AI Automation Workflow',
+            description: 'Workflow, pipeline & production internal system automation.',
+            link: '/ai-automation',
+            icon: '⚙️'
         },
         {
             title: 'Premium Website',
-            description: 'Stunning, high-performance websites.',
+            description: 'High-performance websites with AI Chatbot & Modern Marketing built in.',
             link: '/website',
             icon: '💻'
         },
         {
-            title: 'Strategic Marketing',
-            description: 'Data-driven campaigns for growth.',
+            title: 'AI Chatbot',
+            description: '24/7 conversational agent on your site & messaging apps.',
+            link: '/ai-chatbot',
+            icon: '🤖'
+        },
+        {
+            title: 'Modern Marketing',
+            description: 'SEO · AEO · GEO — be the answer everywhere.',
             link: '/marketing',
             icon: '📈'
         }

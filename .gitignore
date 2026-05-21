@@ -28,6 +28,15 @@ dist-ssr
 .env.local
 .env.*.local
 
+# Backend runtime secrets
+backend/.mcp_key.json
+.mcp_key.json
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+
 
 MD FIles
 *.md

@@ -223,6 +223,86 @@ const Website = () => {
                 </div>
             </section>
 
+            {/* Sub-Services: AI Chatbot + Modern Marketing */}
+            <section className="section" style={{ padding: '4rem 2rem', background: 'rgba(230, 165, 32, 0.03)' }}>
+                <div className="container">
+                    <h2 style={{ fontSize: '2.5rem', color: '#7A4A00', textAlign: 'center', marginBottom: '0.75rem' }}>
+                        Built-in Sub-Services
+                    </h2>
+                    <p style={{ color: '#7A4A00', opacity: 0.7, textAlign: 'center', maxWidth: '720px', margin: '0 auto 3rem' }}>
+                        Every Orion website ships with two strategic sub-services tightly integrated into the build.
+                    </p>
+                    <div className="grid grid-2" style={{ gap: '2rem' }}>
+                        <div className="glass-card hover-lift" style={{ padding: '2.5rem', display: 'flex', flexDirection: 'column' }}>
+                            <Icon name="chatbot" size={56} color="#E6A520" style={{ marginBottom: '1.25rem' }} />
+                            <h3 style={{ fontSize: '1.5rem', color: '#7A4A00', marginBottom: '0.5rem', fontWeight: 700 }}>
+                                AI Chatbot Integration
+                            </h3>
+                            <p style={{ color: '#E6A520', fontWeight: 600, fontSize: '0.9rem', marginBottom: '1rem' }}>
+                                Sub-service of Websites
+                            </p>
+                            <p style={{ color: '#7A4A00', opacity: 0.8, lineHeight: 1.6, marginBottom: '1.5rem' }}>
+                                A live AI chatbot widget embedded directly into your website. Handles enquiries 24/7,
+                                qualifies leads, books appointments, and routes hot prospects to your team —
+                                with optional extension to WhatsApp, Messenger, and Instagram.
+                            </p>
+                            <Link
+                                to="/ai-chatbot"
+                                style={{
+                                    display: 'inline-block',
+                                    padding: '0.7rem 1.5rem',
+                                    background: 'transparent',
+                                    color: '#E6A520',
+                                    border: '2px solid #E6A520',
+                                    borderRadius: '10px',
+                                    textDecoration: 'none',
+                                    fontWeight: '600',
+                                    fontSize: '0.95rem',
+                                    alignSelf: 'flex-start',
+                                    marginTop: 'auto',
+                                    transition: 'all 0.3s ease'
+                                }}
+                            >
+                                Explore AI Chatbot →
+                            </Link>
+                        </div>
+                        <div className="glass-card hover-lift" style={{ padding: '2.5rem', display: 'flex', flexDirection: 'column' }}>
+                            <Icon name="search" size={56} color="#E6A520" style={{ marginBottom: '1.25rem' }} />
+                            <h3 style={{ fontSize: '1.5rem', color: '#7A4A00', marginBottom: '0.5rem', fontWeight: 700 }}>
+                                Modern Marketing (SEO · AEO · GEO)
+                            </h3>
+                            <p style={{ color: '#E6A520', fontWeight: 600, fontSize: '0.9rem', marginBottom: '1rem' }}>
+                                Sub-service of Websites
+                            </p>
+                            <p style={{ color: '#7A4A00', opacity: 0.8, lineHeight: 1.6, marginBottom: '1.5rem' }}>
+                                Your site is engineered to be found in 2026 — by Google, by Perplexity, and by ChatGPT.
+                                SEO (Search Engine Optimization), AEO (Answer Engine Optimization), and
+                                GEO (Generative Engine Optimization) baked into the build.
+                            </p>
+                            <Link
+                                to="/marketing"
+                                style={{
+                                    display: 'inline-block',
+                                    padding: '0.7rem 1.5rem',
+                                    background: 'transparent',
+                                    color: '#E6A520',
+                                    border: '2px solid #E6A520',
+                                    borderRadius: '10px',
+                                    textDecoration: 'none',
+                                    fontWeight: '600',
+                                    fontSize: '0.95rem',
+                                    alignSelf: 'flex-start',
+                                    marginTop: 'auto',
+                                    transition: 'all 0.3s ease'
+                                }}
+                            >
+                                Explore Modern Marketing →
+                            </Link>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
             {/* Features */}
             <section className="section" style={{ padding: '4rem 2rem', background: 'rgba(230, 165, 32, 0.03)' }}>
                 <div className="container">

@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { useUser } from '../context/UserContext';
+import { useAdmin } from '../context/AdminContext';
 import ProfileModal from './ProfileModal';
 import AuthModal from './AuthModal';
 import Icon from './Icons';
@@ -12,7 +13,14 @@ const Navbar = () => {
     const [isAuthModalOpen, setIsAuthModalOpen] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const location = useLocation();
-    const { user, logout } = useUser();
+    const navigate = useNavigate();
+    const { user, logout: userLogout } = useUser();
+    const { isAdmin, logout: adminLogout } = useAdmin();
+
+    const logout = () => {
+        adminLogout();
+        userLogout();
+    };
     const dropdownRef = useRef(null);
 
     useEffect(() => {
@@ -69,9 +77,9 @@ const Navbar = () => {
 
     const navLinks = [
         { path: '/', label: 'Home' },
-        { path: '/ai-chatbot', label: 'AI Chatbots' },
+        { path: '/ai-automation', label: 'AI Automation' },
         { path: '/website', label: 'Websites' },
-        { path: '/marketing', label: 'Marketing' },
+        { path: '/blog', label: 'Blog' },
         // { path: '/website-portfolio', label: 'Portfolio' }
     ];
 
@@ -230,6 +238,30 @@ const Navbar = () => {
                                     </div>
 
                                     <div style={{ padding: '0.75rem 0 1rem' }}>
+                                        {isAdmin && (
+                                            <button
+                                                onClick={() => {
+                                                    setIsDropdownOpen(false);
+                                                    navigate('/admin/blog');
+                                                }}
+                                                style={{
+                                                    background: 'rgba(230, 165, 32, 0.1)',
+                                                    border: 'none',
+                                                    cursor: 'pointer',
+                                                    textAlign: 'left',
+                                                    padding: '0.75rem 1.25rem',
+                                                    color: '#7A4A00',
+                                                    display: 'block',
+                                                    fontSize: '1rem',
+                                                    fontWeight: '600',
+                                                    width: '100%',
+                                                    transition: 'all 0.2s ease',
+                                                    borderLeft: '3px solid #E6A520'
+                                                }}
+                                            >
+                                                📝 Blog CMS
+                                            </button>
+                                        )}
                                         {user ? (
                                             <>
                                                 <button
@@ -333,6 +365,27 @@ const Navbar = () => {
                         ))}
 
                         <div style={{ height: '1px', background: 'rgba(230, 165, 32, 0.2)', margin: '0.5rem 0' }} />
+
+                        {isAdmin && (
+                            <Link
+                                to="/admin/blog"
+                                onClick={() => setIsMobileMenuOpen(false)}
+                                style={{
+                                    background: 'rgba(230, 165, 32, 0.12)',
+                                    color: '#7A4A00',
+                                    textDecoration: 'none',
+                                    fontWeight: '700',
+                                    fontSize: '1.05rem',
+                                    padding: '0.85rem 1rem',
+                                    borderRadius: '10px',
+                                    borderLeft: '3px solid #E6A520',
+                                    textAlign: 'center',
+                                    margin: '0.25rem 0',
+                                }}
+                            >
+                                📝 Blog CMS
+                            </Link>
+                        )}
 
                         {user ? (
                             <>

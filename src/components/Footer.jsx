@@ -9,7 +9,7 @@ const Footer = () => {
             borderTop: '1px solid rgba(197, 168, 128, 0.1)',
         }}>
             <div className="container">
-                <div className="grid grid-3" style={{ marginBottom: 'var(--spacing-lg)' }}>
+                <div className="grid grid-4" style={{ marginBottom: 'var(--spacing-lg)' }}>
                     <div>
                         <h3 style={{
                             fontFamily: 'var(--font-heading)',
@@ -25,11 +25,44 @@ const Footer = () => {
                     </div>
 
                     <div>
-
+                        <h4 style={{
+                            fontFamily: 'var(--font-heading)',
+                            color: 'var(--color-gold)',
+                            fontSize: '1rem',
+                            marginBottom: 'var(--spacing-sm)',
+                        }}>
+                            Services
+                        </h4>
+                        <ul style={{ listStyle: 'none', padding: 0, margin: 0, fontSize: '0.9rem', opacity: 0.8 }}>
+                            <li style={{ marginBottom: '0.4rem' }}>
+                                <Link to="/ai-automation" style={{ color: 'inherit', textDecoration: 'none' }}>AI Automation Workflow</Link>
+                            </li>
+                            <li style={{ marginBottom: '0.4rem' }}>
+                                <Link to="/website" style={{ color: 'inherit', textDecoration: 'none' }}>Websites</Link>
+                            </li>
+                            <li style={{ marginBottom: '0.4rem', paddingLeft: '0.75rem' }}>
+                                <Link to="/ai-chatbot" style={{ color: 'inherit', textDecoration: 'none', opacity: 0.85 }}>↳ AI Chatbot</Link>
+                            </li>
+                            <li style={{ marginBottom: '0.4rem', paddingLeft: '0.75rem' }}>
+                                <Link to="/marketing" style={{ color: 'inherit', textDecoration: 'none', opacity: 0.85 }}>↳ Modern Marketing (SEO/AEO/GEO)</Link>
+                            </li>
+                        </ul>
                     </div>
 
                     <div>
-
+                        <h4 style={{
+                            fontFamily: 'var(--font-heading)',
+                            color: 'var(--color-gold)',
+                            fontSize: '1rem',
+                            marginBottom: 'var(--spacing-sm)',
+                        }}>
+                            Resources
+                        </h4>
+                        <ul style={{ listStyle: 'none', padding: 0, margin: 0, fontSize: '0.9rem', opacity: 0.8 }}>
+                            <li style={{ marginBottom: '0.4rem' }}>
+                                <Link to="/blog" style={{ color: 'inherit', textDecoration: 'none' }}>Blog</Link>
+                            </li>
+                        </ul>
                     </div>
 
                     <div>

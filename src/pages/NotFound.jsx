@@ -61,7 +61,7 @@ const NotFound = () => {
                             Back to Home
                         </Button>
                     </Link>
-                    <Link to="/ai-chatbot">
+                    <Link to="/ai-automation">
                         <Button variant="outline">
                             Explore Services
                         </Button>
