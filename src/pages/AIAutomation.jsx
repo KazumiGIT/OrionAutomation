@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import PricingCard from '../components/PricingCard';
-import TestimonialCard from '../components/TestimonialCard';
 import Icon from '../components/Icons';
 import AnimatedBackground from '../components/AnimatedBackground';
 import SEO from '../components/SEO';
@@ -86,30 +85,6 @@ const AIAutomation = () => {
                 'Dedicated automation engineer',
                 '6 Months Premium Support'
             ]
-        }
-    ];
-
-    const testimonials = [
-        {
-            name: 'Ahmad Razak',
-            company: 'TechGear Malaysia',
-            role: 'Operations Manager',
-            text: 'Orion automated our order-to-fulfillment pipeline. What used to take our ops team 4 hours a day now runs itself. We reclaimed an entire headcount.',
-            rating: 5
-        },
-        {
-            name: 'Priya Sharma',
-            company: 'TechStart Solutions',
-            role: 'Founder',
-            text: 'They mapped out our internal workflows and rebuilt them as automated pipelines. Reporting that took days now lands in our inbox every morning.',
-            rating: 5
-        },
-        {
-            name: 'Sarah Chen',
-            company: 'Wellness Studio KL',
-            role: 'Founder',
-            text: 'From lead capture to booking confirmation, the entire pipeline is automated. We doubled bookings without adding staff.',
-            rating: 5
         }
     ];
 
@@ -285,20 +260,6 @@ const AIAutomation = () => {
                     <div className="grid grid-3" style={{ gap: '2rem' }}>
                         {plans.map((plan, index) => (
                             <PricingCard key={index} {...plan} />
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Testimonials */}
-            <section className="section" style={{ padding: '4rem 2rem' }}>
-                <div className="container">
-                    <h2 style={{ fontSize: '2.5rem', color: '#7A4A00', textAlign: 'center', marginBottom: '3rem' }}>
-                        What Our Clients Say
-                    </h2>
-                    <div className="grid grid-3" style={{ gap: '2rem' }}>
-                        {testimonials.map((testimonial, index) => (
-                            <TestimonialCard key={index} {...testimonial} />
                         ))}
                     </div>
                 </div>

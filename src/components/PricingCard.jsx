@@ -26,6 +26,7 @@ const PricingCard = ({ title, price, setupFee, features, isPopular = false }) =>
             className="glass-card hover-lift card-3d fade-in-up"
             style={{
                 position: 'relative',
+                overflow: 'visible',
                 border: isPopular ? '2px solid #E6A520' : '1px solid rgba(230, 165, 32, 0.2)',
                 boxShadow: isPopular ? '0 8px 32px rgba(230, 165, 32, 0.3)' : '0 4px 20px rgba(0, 0, 0, 0.1)',
                 display: 'flex',

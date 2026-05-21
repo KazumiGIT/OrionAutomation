@@ -25,39 +25,6 @@ const Home = () => {
         }
     ];
 
-    const testimonials = [
-        {
-            name: 'Sarah Chen',
-            company: 'Wellness Studio KL',
-            role: 'Founder',
-            text: 'The AI chatbot has transformed our booking process. We now handle 3x more appointments.',
-            rating: 5,
-            avatar: 'https://api.dicebear.com/7.x/shapes/svg?seed=Sarah&backgroundColor=E6A520'
-        },
-        {
-            name: 'David Lim',
-            company: 'Luxury Interiors',
-            role: 'CEO',
-            text: 'Orion delivered a website that perfectly captures our brand essence. Unmatched quality.',
-            rating: 5,
-            avatar: 'https://api.dicebear.com/7.x/shapes/svg?seed=David&backgroundColor=730000'
-        },
-        {
-            name: 'Ahmad Razak',
-            company: 'TechGear Malaysia',
-            role: 'Operations Manager',
-            text: "Orion's automation solutions cut our response time from hours to seconds.",
-            rating: 5,
-            avatar: 'https://api.dicebear.com/7.x/shapes/svg?seed=Ahmad&backgroundColor=7A4A00'
-        }
-    ];
-
-    const stats = [
-        { number: '98%', label: 'Client Satisfaction' },
-        { number: '500+', label: 'Projects Delivered' },
-        { number: '24/7', label: 'Support Available' }
-    ];
-
     const processSteps = [
         { icon: 'search', title: 'Discovery', desc: 'We analyze your business needs and goals.' },
         { icon: 'design', title: 'Strategy', desc: 'We design a custom roadmap for success.' },
@@ -97,12 +64,6 @@ const Home = () => {
         textAlign: 'center',
         maxWidth: '600px',
         margin: '0 auto 3rem auto'
-    };
-
-    const renderStars = (count) => {
-        return Array.from({ length: count }).map((_, i) => (
-            <Icon key={i} name="star-filled" size={18} color="#E6A520" style={{ marginRight: '2px' }} />
-        ));
     };
 
     return (
@@ -227,31 +188,6 @@ const Home = () => {
                         </div>
                     </div>
 
-                    {/* Stats */}
-                    <div className="grid grid-3" style={{ marginBottom: '4rem' }}>
-                        {stats.map((stat, index) => (
-                            <div key={index} className="glass-card animate-me" style={{
-                                padding: '2.5rem 2rem',
-                                display: 'flex',
-                                flexDirection: 'column',
-                                justifyContent: 'center',
-                                alignItems: 'center',
-                                textAlign: 'center'
-                            }}>
-                                <h3 style={{ 
-                                    fontSize: 'clamp(3rem, 5vw, 4.5rem)', 
-                                    color: '#E6A520', 
-                                    marginBottom: '0.5rem', 
-                                    fontWeight: '800',
-                                    lineHeight: 1 
-                                }}>
-                                    {stat.number}
-                                </h3>
-                                <p style={{ color: '#7A4A00', fontSize: '1rem', fontWeight: '500', opacity: 0.8 }}>{stat.label}</p>
-                            </div>
-                        ))}
-                    </div>
-
                     {/* Our Process */}
                     <div className="glass-card animate-me" style={{ padding: '3rem', marginBottom: '4rem' }}>
                         <h2 style={sectionTitleStyle}>Our Process</h2>
@@ -310,54 +246,6 @@ const Home = () => {
                         </div>
                     </div>
 
-                    {/* Testimonials */}
-                    <div className="glass-card animate-me" style={{ padding: '3rem', marginBottom: '4rem' }}>
-                        <h2 style={sectionTitleStyle}>Client Success Stories</h2>
-                        <p style={sectionSubtitleStyle}>Don't just take our word for it.</p>
-                        <div className="grid grid-3" style={{ gap: '1.5rem' }}>
-                            {testimonials.map((t, i) => (
-                                <div key={i} className="glass-card animate-me" style={{ 
-                                    padding: '2rem', 
-                                    background: 'rgba(255, 248, 231, 0.5)',
-                                    borderTop: '3px solid #E6A520'
-                                }}>
-                                    <div style={{ marginBottom: '1rem' }}>
-                                        <Icon name="quote" size={32} color="rgba(230, 165, 32, 0.3)" />
-                                    </div>
-                                    <div style={{ marginBottom: '1rem', display: 'flex', gap: '2px' }}>
-                                        {renderStars(t.rating)}
-                                    </div>
-                                    <p className="mb-md" style={{ 
-                                        fontStyle: 'italic', 
-                                        color: '#7A4A00', 
-                                        fontSize: '1rem', 
-                                        lineHeight: 1.7, 
-                                        opacity: 0.9 
-                                    }}>
-                                        "{t.text}"
-                                    </p>
-                                    <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', marginTop: 'auto' }}>
-                                        <img 
-                                            src={t.avatar} 
-                                            alt={t.name}
-                                            style={{
-                                                width: '48px',
-                                                height: '48px',
-                                                borderRadius: '50%',
-                                                border: '2px solid #E6A520',
-                                                objectFit: 'cover'
-                                            }}
-                                        />
-                                        <div>
-                                            <h4 style={{ color: '#7A4A00', marginBottom: '0.2rem', fontWeight: '700', fontSize: '1rem' }}>{t.name}</h4>
-                                            <p style={{ fontSize: '0.8rem', opacity: 0.7, color: '#7A4A00' }}>{t.role}, {t.company}</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                        </div>
-                    </div>
-
                     {/* CTA */}
                     <div className="glass-card flex-center flex-col text-center animate-me" style={{ 
                         padding: '5rem 3rem',
@@ -377,7 +265,7 @@ const Home = () => {
                             marginBottom: '2.5rem', 
                             maxWidth: '550px' 
                         }}>
-                            Join hundreds of successful businesses already using our AI-powered solutions.
+                            Let's scope your first automation, website, or AI chatbot — no fluff, no hard sell.
                         </p>
                         <Button onClick={() => setIsModalOpen(true)} variant="primary" size="large" className="btn-shimmer">
                             Get Started Today

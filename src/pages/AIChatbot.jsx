@@ -1,7 +1,6 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import PricingCard from '../components/PricingCard';
-import TestimonialCard from '../components/TestimonialCard';
 import Icon from '../components/Icons';
 import AnimatedBackground from '../components/AnimatedBackground';
 import SEO from '../components/SEO';
@@ -48,30 +47,6 @@ const AIChatbot = () => {
                 'Monthly Email Marketing Automation',
                 'Monthly Dashboard Insights'
             ]
-        }
-    ];
-
-    const testimonials = [
-        {
-            name: 'Sarah Chen',
-            company: 'Wellness Studio KL',
-            role: 'Founder',
-            text: 'The AI chatbot has transformed our booking process. We now handle 3x more appointments without hiring additional staff. Customer satisfaction is at an all-time high!',
-            rating: 5
-        },
-        {
-            name: 'Ahmad Razak',
-            company: 'TechGear Malaysia',
-            role: 'Operations Manager',
-            text: 'Orion\'s chatbot automation cut our response time from hours to seconds. The CRM integration is seamless, and we\'ve seen a 40% increase in lead conversions.',
-            rating: 5
-        },
-        {
-            name: 'Michelle Tan',
-            company: 'Gourmet Delights',
-            role: 'Owner',
-            text: 'Best investment we\'ve made! The chatbot handles customer inquiries 24/7, and the monthly training keeps it getting smarter. Our team can now focus on what matters most.',
-            rating: 5
         }
     ];
 
@@ -260,20 +235,6 @@ const AIChatbot = () => {
                 </div>
             </section>
 
-            {/* Testimonials */}
-            <section className="section" style={{ padding: '4rem 2rem' }}>
-                <div className="container">
-                    <h2 style={{ fontSize: '2.5rem', color: '#7A4A00', textAlign: 'center', marginBottom: '3rem' }}>
-                        What Our Clients Say
-                    </h2>
-                    <div className="grid grid-3" style={{ gap: '2rem' }}>
-                        {testimonials.map((testimonial, index) => (
-                            <TestimonialCard key={index} {...testimonial} />
-                        ))}
-                    </div>
-                </div>
-            </section>
-
             {/* CTA */}
             <section className="section" style={{ padding: '5rem 2rem', textAlign: 'center' }}>
                 <div className="container">
@@ -282,7 +243,7 @@ const AIChatbot = () => {
                             Ready to Automate Your Business?
                         </h2>
                         <p style={{ fontSize: '1.2rem', color: '#7A4A00', opacity: 0.8, marginBottom: '2rem', maxWidth: '600px', margin: '0 auto 2rem' }}>
-                            Join hundreds of businesses already using AI chatbots to scale their customer service
+                            Let's scope a chatbot for your business — pick the platforms, the use case, and ship inside two weeks.
                         </p>
                         <a
                             href="https://wa.me/601117993797"

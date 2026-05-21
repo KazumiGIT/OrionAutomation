@@ -2,7 +2,6 @@ import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
 import PricingCard from '../components/PricingCard';
-import TestimonialCard from '../components/TestimonialCard';
 import Icon from '../components/Icons';
 import AnimatedBackground from '../components/AnimatedBackground';
 import SEO from '../components/SEO';
@@ -54,30 +53,6 @@ const Website = () => {
                 '6 Months Premium Support',
                 'Dedicated Project Manager'
             ]
-        }
-    ];
-
-    const testimonials = [
-        {
-            name: 'David Lim',
-            company: 'Luxury Interiors',
-            role: 'CEO',
-            text: 'Orion delivered a website that perfectly captures our brand essence. The attention to detail and premium feel has significantly elevated our online presence. Inquiries have doubled!',
-            rating: 5
-        },
-        {
-            name: 'Priya Sharma',
-            company: 'TechStart Solutions',
-            role: 'Founder',
-            text: 'From concept to launch, the team was exceptional. The Business package gave us everything we needed—beautiful design, seamless functionality, and ongoing support that\'s second to none.',
-            rating: 5
-        },
-        {
-            name: 'James Wong',
-            company: 'Gourmet Haven',
-            role: 'Owner',
-            text: 'The E-commerce package transformed our entire digital ecosystem. The integration is flawless, and our online sales have tripled. Worth every ringgit!',
-            rating: 5
         }
     ];
 
@@ -442,20 +417,6 @@ const Website = () => {
                     <div className="grid grid-3" style={{ gap: '2rem' }}>
                         {packages.map((pkg, index) => (
                             <PricingCard key={index} {...pkg} />
-                        ))}
-                    </div>
-                </div>
-            </section>
-
-            {/* Testimonials */}
-            <section className="section" style={{ padding: '4rem 2rem' }}>
-                <div className="container">
-                    <h2 style={{ fontSize: '2.5rem', color: '#7A4A00', textAlign: 'center', marginBottom: '3rem' }}>
-                        Client Success Stories
-                    </h2>
-                    <div className="grid grid-3" style={{ gap: '2rem' }}>
-                        {testimonials.map((testimonial, index) => (
-                            <TestimonialCard key={index} {...testimonial} />
                         ))}
                     </div>
                 </div>
