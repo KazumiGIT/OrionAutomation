@@ -87,8 +87,9 @@ const Home = () => {
                 <ScrollObserver>
                     {/* Hero Section */}
                     <div className="glass-card flex-center flex-col text-center animate-me mb-2xl" style={{
-                        padding: '5rem 2rem',
-                        minHeight: '55vh',
+                        padding: '4rem 2rem',
+                        minHeight: '88vh',
+                        boxSizing: 'border-box',
                         background: 'linear-gradient(135deg, rgba(255, 248, 231, 0.9) 0%, rgba(230, 165, 32, 0.15) 100%)',
                         position: 'relative',
                         overflow: 'hidden'
