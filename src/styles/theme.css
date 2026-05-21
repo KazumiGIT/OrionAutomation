@@ -1,3 +1,81 @@
+/* CSS Variables — design tokens used across components */
+:root {
+  /* Colors */
+  --color-gold: #E6A520;
+  --color-gold-dark: #C5891A;
+  --color-brown: #7A4A00;
+  --color-brown-dark: #4A2A00;
+  --color-cream: #FFF8E7;
+  --color-paper: #FBF1DA;
+  --color-text: #3A2300;
+  --color-ivory: #FFF8E7;
+  --color-merlot: #730000;
+
+  /* Typography */
+  --font-heading: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+
+  /* Spacing scale */
+  --spacing-xs: 0.5rem;
+  --spacing-sm: 1rem;
+  --spacing-md: 1.5rem;
+  --spacing-lg: 2rem;
+  --spacing-xl: 3rem;
+  --spacing-2xl: 4rem;
+
+  /* Border radius */
+  --radius-sm: 0.5rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.25rem;
+
+  /* Shadows */
+  --shadow-sm: 0 2px 8px rgba(122, 74, 0, 0.08);
+  --shadow-md: 0 6px 20px rgba(122, 74, 0, 0.10);
+  --shadow-lg: 0 16px 48px rgba(122, 74, 0, 0.15);
+  --shadow-glow-gold: 0 0 24px rgba(230, 165, 32, 0.35);
+}
+
+/* Layout utilities — used by JSX className props */
+.flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.flex-between {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.flex-col {
+  flex-direction: column;
+}
+
+.flex {
+  display: flex;
+}
+
+.text-center {
+  text-align: center;
+}
+
+/* Margin utilities */
+.mt-sm { margin-top: var(--spacing-sm); }
+.mt-md { margin-top: var(--spacing-md); }
+.mt-lg { margin-top: var(--spacing-lg); }
+.mt-xl { margin-top: var(--spacing-xl); }
+.mb-sm { margin-bottom: var(--spacing-sm); }
+.mb-md { margin-bottom: var(--spacing-md); }
+.mb-lg { margin-bottom: var(--spacing-lg); }
+.mb-xl { margin-bottom: var(--spacing-xl); }
+.mb-2xl { margin-bottom: var(--spacing-2xl); }
+
+/* Gap utilities */
+.gap-sm { gap: var(--spacing-sm); }
+.gap-md { gap: var(--spacing-md); }
+.gap-lg { gap: var(--spacing-lg); }
+
 /* Clean Glassmorphism */
 .glass-card {
   background: rgba(255, 248, 231, 0.7);
