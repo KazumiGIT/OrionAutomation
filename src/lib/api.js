@@ -69,6 +69,14 @@ async function request(path, { method = 'GET', body, admin = false, formData } =
 export const listPosts = () => request('/api/blogs');
 export const getPost = (slug) => request(`/api/blogs/${encodeURIComponent(slug)}`);
 
+// Chatbot proxy. The Gemini key and guardrails live on the backend. When
+// `asAdmin` is true and an admin token exists, it is sent so the backend honours
+// persona / knowledge-base overrides for the CMS live preview.
+export const sendChatMessage = (payload, { asAdmin = false } = {}) => {
+    const useAdmin = asAdmin && !!getAdminToken();
+    return request('/api/chat', { method: 'POST', body: payload, admin: useAdmin });
+};
+
 // ─── Admin ────────────────────────────────────────────────────────────────────
 
 export const adminLogin = (username, password) =>

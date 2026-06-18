@@ -33,7 +33,9 @@ from __future__ import annotations
 
 import os
 import re
+import time
 import unicodedata
+from collections import defaultdict, deque
 from datetime import date
 from pathlib import Path
 from typing import Any, Literal
@@ -43,7 +45,9 @@ from fastapi import (
     Depends,
     FastAPI,
     File,
+    Header,
     HTTPException,
+    Request,
     Response,
     UploadFile,
     status,
@@ -55,8 +59,9 @@ from pydantic import BaseModel, Field
 # Load env from project root (one level up from backend/)
 load_dotenv(Path(__file__).parent.parent / ".env")
 
+from backend import chat as chatbot
 from backend import keys
-from backend.auth import require_admin, verify_admin_login
+from backend.auth import is_admin_token, require_admin, verify_admin_login
 from backend.drive_storage import get_storage
 from backend.mcp_server import mcp as mcp_server, mcp_asgi_app
 
@@ -125,6 +130,23 @@ class LoginIn(BaseModel):
     password: str
 
 
+class ChatTurn(BaseModel):
+    role: Literal["user", "model"]
+    text: str = Field(max_length=2000)
+
+
+class ChatIn(BaseModel):
+    message: str = Field(min_length=1, max_length=2000)
+    history: list[ChatTurn] = Field(default_factory=list, max_length=20)
+    # Optional personalization hint (untrusted; never used for access control).
+    user: dict | None = None
+    # Persona overrides — honoured ONLY for authenticated admins (CMS preview).
+    botName: str | None = Field(default=None, max_length=80)
+    aiGoal: str | None = Field(default=None, max_length=2000)
+    personality: str | None = Field(default=None, max_length=2000)
+    knowledgeBase: str | None = Field(default=None, max_length=8000)
+
+
 # ─── Helpers ──────────────────────────────────────────────────────────────────
 
 def _slugify(text: str) -> str:
@@ -147,6 +169,27 @@ def _normalize_post(data: dict) -> dict:
         data["excerpt"] = data["description"]
     data["sections"] = data.get("sections") or []
     return data
+
+
+# Simple in-memory per-IP rate limiter for the public chat endpoint. Protects the
+# (unauthenticated) Gemini proxy from abuse / quota burn. Per-process only; for a
+# multi-worker deployment, back this with Redis instead.
+_CHAT_WINDOW_SECONDS = 60
+_CHAT_MAX_PER_WINDOW = 15
+_chat_hits: dict[str, deque] = defaultdict(deque)
+
+
+def _rate_limit_chat(client_ip: str) -> None:
+    now = time.monotonic()
+    hits = _chat_hits[client_ip]
+    while hits and now - hits[0] > _CHAT_WINDOW_SECONDS:
+        hits.popleft()
+    if len(hits) >= _CHAT_MAX_PER_WINDOW:
+        raise HTTPException(
+            status_code=429,
+            detail="Too many messages. Please slow down and try again shortly.",
+        )
+    hits.append(now)
 
 
 # ─── Public routes ────────────────────────────────────────────────────────────
@@ -188,6 +231,51 @@ def get_image(file_id: str):
         media_type=mime,
         headers={"Cache-Control": "public, max-age=86400"},
     )
+
+
+@app.post("/api/chat")
+def chat(
+    body: ChatIn,
+    request: Request,
+    authorization: str | None = Header(default=None),
+):
+    """Public chatbot proxy. The Gemini key and guardrails live server-side.
+
+    Persona/knowledge-base overrides in the body are applied only for admins
+    (used by the CMS live preview); guests always get the locked config.
+    """
+    client_ip = request.client.host if request.client else "unknown"
+    _rate_limit_chat(client_ip)
+
+    overrides = None
+    if is_admin_token(authorization):
+        overrides = {
+            "botName": body.botName,
+            "aiGoal": body.aiGoal,
+            "personality": body.personality,
+            "knowledgeBase": body.knowledgeBase,
+        }
+
+    user_ctx = None
+    if isinstance(body.user, dict) and body.user.get("username"):
+        user_ctx = {
+            "username": str(body.user.get("username"))[:80],
+            "plan": str(body.user.get("plan"))[:120] if body.user.get("plan") else None,
+        }
+
+    history = [{"role": t.role, "text": t.text} for t in body.history]
+
+    try:
+        reply = chatbot.generate_reply(
+            message=body.message,
+            history=history,
+            user_ctx=user_ctx,
+            overrides=overrides,
+        )
+    except RuntimeError as exc:
+        raise HTTPException(status_code=503, detail=str(exc))
+
+    return {"reply": reply}
 
 
 # ─── Admin routes ─────────────────────────────────────────────────────────────

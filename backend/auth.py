@@ -36,6 +36,17 @@ def require_admin(authorization: str | None = Header(default=None)) -> None:
         )
 
 
+def is_admin_token(authorization: str | None) -> bool:
+    """True if the Authorization header carries a valid admin bearer token.
+
+    Unlike require_admin, this never raises — used by mixed public/admin routes
+    that allow guests but unlock extra behaviour for admins.
+    """
+    _, expected_password = admin_credentials()
+    token = _bearer(authorization)
+    return bool(token and secrets.compare_digest(token, expected_password))
+
+
 def verify_admin_login(username: str, password: str) -> bool:
     expected_user, expected_pass = admin_credentials()
     user_ok = secrets.compare_digest(username or "", expected_user)

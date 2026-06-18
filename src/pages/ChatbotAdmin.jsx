@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import { motion } from 'framer-motion';
-import { GoogleGenerativeAI } from '@google/generative-ai';
+import { sendChatMessage } from '../lib/api';
 
 const ChatbotAdmin = () => {
     // Settings State
@@ -39,13 +39,16 @@ Contact: marketing@orionautomation.xyz`
 
     const handleSave = () => {
         localStorage.setItem('chatbotSettings', JSON.stringify(settings));
-        alert('Settings saved! The global chatbot has been updated.');
+        alert(
+            'Settings saved for preview. Note: the live chatbot config (guardrails and ' +
+            'knowledge base) is now managed on the backend in backend/chat.py, so update ' +
+            'there to change what visitors see.'
+        );
     };
 
-    // Chat Logic (Preview)
-    const genAI = new GoogleGenerativeAI(import.meta.env.VITE_GEMINI_API_KEY);
-    const model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-
+    // Chat Logic (Preview) — routed through the backend proxy. The persona and
+    // knowledge base below are sent as admin overrides; the server still wraps
+    // them in the same hard guardrails the public widget uses.
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
     };
@@ -58,34 +61,36 @@ Contact: marketing@orionautomation.xyz`
         e.preventDefault();
         if (!input.trim() || isLoading) return;
 
-        const userMessage = { type: 'user', text: input };
-        setMessages(prev => [...prev, userMessage]);
-        const currentInput = input;
+        const currentInput = input.trim();
+        const history = messages
+            .slice(1)
+            .map((m) => ({ role: m.type === 'user' ? 'user' : 'model', text: m.text }));
+
+        setMessages(prev => [...prev, { type: 'user', text: currentInput }]);
         setInput('');
         setIsLoading(true);
 
         try {
-            // Construct dynamic context based on settings
-            const context = `You are ${settings.botName}.
-            
-            Your Goal: ${settings.aiGoal}
-            
-            Your Personality: ${settings.personality}
-            
-            Knowledge Base:
-            ${settings.knowledgeBase}
-            
-            Please answer the following question based on the above instructions:
-            ${currentInput}`;
-
-            const result = await model.generateContent(context);
-            const response = await result.response;
-            const botResponse = response.text();
-
-            setMessages(prev => [...prev, { type: 'bot', text: botResponse }]);
+            // asAdmin: true sends the admin token so the backend applies these
+            // persona / knowledge-base overrides for the preview.
+            const { reply } = await sendChatMessage(
+                {
+                    message: currentInput,
+                    history,
+                    botName: settings.botName,
+                    aiGoal: settings.aiGoal,
+                    personality: settings.personality,
+                    knowledgeBase: settings.knowledgeBase,
+                },
+                { asAdmin: true }
+            );
+            setMessages(prev => [...prev, { type: 'bot', text: reply }]);
         } catch (error) {
             console.error('Preview Error:', error);
-            setMessages(prev => [...prev, { type: 'bot', text: "Error: Could not generate response. Please check your API key or connection." }]);
+            const msg = error.status === 429
+                ? "Too many messages. Please wait a moment and try again."
+                : "Error: Could not generate a response. Please check that the backend is running.";
+            setMessages(prev => [...prev, { type: 'bot', text: msg }]);
         } finally {
             setIsLoading(false);
         }

@@ -30,13 +30,13 @@ from supabase import create_client, Client
 
 # ─── Configuration ────────────────────────────────────────────────────────────
 
-GEMINI_API_KEY = os.environ.get("VITE_GEMINI_API_KEY") or os.environ.get("GEMINI_API_KEY")
+GEMINI_API_KEY = os.environ.get("GEMINI_KEY")
 SUPABASE_URL   = os.environ.get("VITE_SUPABASE_URL")   or os.environ.get("SUPABASE_URL")
 SUPABASE_KEY   = os.environ.get("SUPABASE_SERVICE_KEY")  # Service role key (backend only)
 
 if not all([GEMINI_API_KEY, SUPABASE_URL, SUPABASE_KEY]):
     print("❌  Missing required environment variables:")
-    if not GEMINI_API_KEY: print("   - VITE_GEMINI_API_KEY (or GEMINI_API_KEY)")
+    if not GEMINI_API_KEY: print("   - GEMINI_KEY")
     if not SUPABASE_URL:   print("   - VITE_SUPABASE_URL (or SUPABASE_URL)")
     if not SUPABASE_KEY:   print("   - SUPABASE_SERVICE_KEY")
     sys.exit(1)

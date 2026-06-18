@@ -1,6 +1,9 @@
 import React, { useState, useRef, useEffect } from 'react';
-import { GoogleGenerativeAI } from '@google/generative-ai';
 import { useUser } from '../context/UserContext';
+import { sendChatMessage } from '../lib/api';
+
+// The Gemini key and all guardrails live on the backend (POST /api/chat).
+// Nothing AI-related ships in this bundle, so the rules can't be bypassed.
 
 const ChatbotWidget = () => {
     const { user } = useUser();
@@ -11,7 +14,7 @@ const ChatbotWidget = () => {
             text: (() => {
                 const saved = localStorage.getItem('chatbotSettings');
                 const name = saved ? JSON.parse(saved).botName : 'Orion AI';
-                return `Hello! I am ${name} powered by Google Gemini. How can I assist you today?`;
+                return `Hello! I am ${name}. How can I assist you today?`;
             })()
         }
     ]);
@@ -19,20 +22,6 @@ const ChatbotWidget = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [apiError, setApiError] = useState(false);
     const messagesEndRef = useRef(null);
-
-    // Check API key availability
-    const apiKey = import.meta.env.VITE_GEMINI_API_KEY;
-
-    // Initialize Gemini API only if key exists
-    let genAI = null;
-    let model = null;
-
-    if (apiKey) {
-        genAI = new GoogleGenerativeAI(apiKey);
-        model = genAI.getGenerativeModel({ model: "gemini-2.5-flash" });
-    } else {
-        console.error('⚠️ Gemini API key not found. Please configure VITE_GEMINI_API_KEY in your environment variables.');
-    }
 
     const scrollToBottom = () => {
         messagesEndRef.current?.scrollIntoView({ behavior: "smooth" });
@@ -46,125 +35,44 @@ const ChatbotWidget = () => {
         e.preventDefault();
         if (!input.trim() || isLoading) return;
 
-        // Check if API key is available
-        if (!apiKey || !model) {
-            setMessages(prev => [...prev,
-            { type: 'user', text: input },
-            {
-                type: 'bot',
-                text: '⚠️ Chatbot is currently unavailable. The API key is not configured. Please contact the administrator or try again later.'
+        const currentInput = input.trim();
+
+        // Build recent conversation history (exclude the very first greeting).
+        const history = messages
+            .slice(1)
+            .map((m) => ({ role: m.type === 'user' ? 'user' : 'model', text: m.text }));
+
+        // Optional personalization hint. The backend treats this as untrusted and
+        // never uses it for access control.
+        const userCtx = user
+            ? {
+                username: user.username,
+                plan: user.currentPlan ? `${user.currentPlan.title} (${user.currentPlan.price})` : 'No active plan',
             }
-            ]);
-            setInput('');
-            setApiError(true);
-            return;
-        }
+            : null;
 
         // Add user message
-        const userMessage = { type: 'user', text: input };
-        setMessages(prev => [...prev, userMessage]);
-        const currentInput = input;
+        setMessages(prev => [...prev, { type: 'user', text: currentInput }]);
         setInput('');
         setIsLoading(true);
 
         try {
-            // Get settings from localStorage or use defaults
-            const savedSettings = localStorage.getItem('chatbotSettings');
-            const settings = savedSettings ? JSON.parse(savedSettings) : {
-                botName: 'Orion AI',
-                aiGoal: 'You are Orion AI, a friendly assistant for Orion Automation. Help visitors learn about our services and connect with us.',
-                personality: 'Conversational, helpful, and concise. Keep responses SHORT (2-3 sentences max). Sound human and friendly, not robotic.',
-                knowledgeBase: `ORION AUTOMATION - Complete Info:
-
-🤖 AI CHATBOT SERVICES:
-- Basic Plan: RM 399/month - Perfect for small businesses, 1,000 messages/month, basic customization
-- Advanced Plan: RM 799/month - Growing businesses, 5,000 messages/month, full customization, analytics
-- Enterprise Plan: RM 1,499/month - Large companies, unlimited messages, priority support, advanced AI
-
-💻 WEBSITE DEVELOPMENT:
-- Essential Package: RM 8,900 - 5-page responsive website, mobile-friendly, basic SEO, 1 month support
-- Premium Package: RM 19,900 - 10-page custom design, advanced SEO, e-commerce ready, 3 months support
-- Elite Package: RM 39,900 - Unlimited pages, premium design, full e-commerce, 6 months support, custom features
-
-📱 MARKETING & SEO:
-- Social media management
-- Google Ads & Facebook Ads
-- SEO optimization
-- Content creation
-- Email marketing campaigns
-
-📍 CONTACT:
-- Email: marketing@orionautomation.xyz
-- WhatsApp: +60 11-5445 5435
-- Website: orionautomation.xyz
-- Location: Based in Malaysia, serving globally
-
-🎯 WHAT WE DO:
-We help businesses grow with AI chatbots, beautiful websites, and smart marketing. Our mission is making automation accessible to everyone.
-
-✨ PORTFOLIO:
-- Sumi-Ka Restaurant website (authentic Japanese yakitori restaurant in SS15 Subang Jaya)
-- Multiple e-commerce platforms
-- Corporate websites
-- Custom web applications
-
-RESPONSE STYLE:
-- Keep it SHORT (2-3 sentences)
-- Be friendly and conversational
-- Use emojis occasionally 
-- If asked about pricing, mention packages briefly
-- Always offer to connect them via WhatsApp or email for details
-- Sound like a helpful human, not a robot`
-            };
-
-            // Create context based on settings
-            let userContext = '';
-            if (user) {
-                userContext = `
-CURRENT USER INFO:
-- Username: ${user.username}
-- Email: ${user.email}
-- Current Plan: ${user.currentPlan ? `${user.currentPlan.title} (${user.currentPlan.price})` : 'No active plan'}
-- Member Since: ${user.joinDate}
-
-INSTRUCTION: You are talking to @${user.username}. Use their username occasionally to be friendly. You know their plan status, so if they ask about upgrades, refer to their current plan.`;
-            } else {
-                userContext = `
-CURRENT USER INFO: Guest User (Not logged in)
-
-INSTRUCTION: The user is a guest. Encourage them to sign up or log in if they ask about account-specific features.`;
-            }
-
-            const context = `You are ${settings.botName}.
-
-${settings.aiGoal}
-
-Personality: ${settings.personality}
-
-${userContext}
-
-Knowledge Base:
-${settings.knowledgeBase}
-
-CRITICAL: Keep your response SHORT (maximum 2-3 sentences). Be conversational and human-like.
-
-User question: ${currentInput}`;
-
-            // Call Gemini API
-            const result = await model.generateContent(context);
-            const response = await result.response;
-            const botResponse = response.text();
-
-            // Add bot response
-            setMessages(prev => [...prev, { type: 'bot', text: botResponse }]);
+            const { reply } = await sendChatMessage({
+                message: currentInput,
+                history,
+                user: userCtx,
+            });
+            setMessages(prev => [...prev, { type: 'bot', text: reply }]);
+            setApiError(false);
         } catch (error) {
-            console.error('Gemini API error:', error);
+            console.error('Chat error:', error);
             let errorMessage = "I'm having trouble connecting right now. ";
 
-            if (error.message?.includes('API key')) {
-                errorMessage += "Please check the API configuration.";
-            } else if (error.message?.includes('quota')) {
-                errorMessage += "API quota exceeded. Please try again later.";
+            if (error.status === 429) {
+                errorMessage = "You're sending messages a little too fast. Please wait a moment and try again.";
+            } else if (error.status === 503) {
+                errorMessage = "The chatbot is temporarily unavailable. Please reach us at marketing@orionautomation.xyz.";
+                setApiError(true);
             } else {
                 errorMessage += "Please try asking your question again, or contact us at marketing@orionautomation.xyz";
             }
